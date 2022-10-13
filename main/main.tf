@@ -2,7 +2,7 @@ provider "aws" {
     region = "us-east-1"
 }
 
-module "networking" {
+module "cluster_vpc" {
     source = "../modules/networking"
     cluster_vpc_cidr_block = var.cluster_vpc_cidr_block
     vpc_tag = var.vpc_tag
@@ -10,6 +10,26 @@ module "networking" {
     azs = var.azs
     internet_gateway_tag = var.internet_gateway_tag
     routetable_tag = var.routetable_tag
+}
+
+module "aws_vpc" {
+    source = "../modules/networking"
+    cluster_vpc_cidr_block = var.aws_vpc_cidr_block
+    vpc_tag = var.vpc_tag
+    subnet_block_count = var.subnet_block_count
+    azs = var.azs
+    internet_gateway_tag = var.internet_gateway_tag
+    routetable_tag = var.routetable_tag
+}
+
+module "vpc_peering" {
+    source = "../modules/vpc_peering"
+    requestor_vpc_id = var.requestor_vpc_id
+    acceptor_vpc_id = var.acceptor_vpc_id
+    requestor_route_table_id = var.requestor_route_table_id
+    requestor_cidr_block = var.requestor_cidr_block
+    acceptor_route_table_id = var.acceptor_route_table_id
+    acceptor_cidr_block = var.acceptor_cidr_block
 }
 
 module "rds" {
