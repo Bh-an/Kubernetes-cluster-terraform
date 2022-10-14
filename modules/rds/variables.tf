@@ -22,6 +22,10 @@ variable "rds_password" {
     
 }
 
-variable "db_subnet_group_name" {
+variable "rds_tag" {
+    
+}
+
+variable "aws_vpc_id" {
     
 }

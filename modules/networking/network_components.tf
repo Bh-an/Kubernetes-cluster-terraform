@@ -1,5 +1,5 @@
 resource "aws_vpc" "vpc_block" {
-    cidr_block = var.cluster_vpc_cidr_block
+    cidr_block = var.vpc_cidr_block
     enable_dns_hostnames = true
     tags = {
         Name = var.vpc_tag
@@ -10,7 +10,7 @@ resource "aws_subnet" "subnet_block" {
     depends_on = [
         aws_vpc.vpc_block
     ]
-    count = length(var.subnet_block_count)
+    count = length(var.subnets_block)
     vpc_id = aws_vpc.vpc_block.id
     cidr_block              = element(concat(var.subnets_block, [""]), count.index)
     availability_zone       = element(concat(var.azs, [""]), count.index)
