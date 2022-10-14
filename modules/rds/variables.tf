@@ -26,6 +26,10 @@ variable "rds_tag" {
     
 }
 
-variable "aws_vpc_id" {
+variable "subnet_block_tag" {
     
+}
+
+variable "subnet_id" {
+  
 }

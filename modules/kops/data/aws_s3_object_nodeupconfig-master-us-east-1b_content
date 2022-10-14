@@ -1,0 +1,272 @@
+APIServerConfig:
+  KubeAPIServer:
+    allowPrivileged: true
+    anonymousAuth: false
+    apiAudiences:
+    - kubernetes.svc.default
+    apiServerCount: 3
+    authorizationMode: Node,RBAC
+    bindAddress: 0.0.0.0
+    cloudProvider: external
+    enableAdmissionPlugins:
+    - NamespaceLifecycle
+    - LimitRanger
+    - ServiceAccount
+    - DefaultStorageClass
+    - DefaultTolerationSeconds
+    - MutatingAdmissionWebhook
+    - ValidatingAdmissionWebhook
+    - NodeRestriction
+    - ResourceQuota
+    etcdServers:
+    - https://127.0.0.1:4001
+    etcdServersOverrides:
+    - /events#https://127.0.0.1:4002
+    featureGates:
+      CSIMigrationAWS: "true"
+      InTreePluginAWSUnregister: "true"
+    image: registry.k8s.io/kube-apiserver:v1.25.2@sha256:86e7b79379dddf58d7b7189d02ca96cc7e07d18efa4eb42adcaa4cf94531b96e
+    kubeletPreferredAddressTypes:
+    - InternalIP
+    - Hostname
+    - ExternalIP
+    logLevel: 2
+    requestheaderAllowedNames:
+    - aggregator
+    requestheaderExtraHeaderPrefixes:
+    - X-Remote-Extra-
+    requestheaderGroupHeaders:
+    - X-Remote-Group
+    requestheaderUsernameHeaders:
+    - X-Remote-User
+    securePort: 443
+    serviceAccountIssuer: https://api.internal.kops.rajmehta.live
+    serviceAccountJWKSURI: https://api.internal.kops.rajmehta.live/openid/v1/jwks
+    serviceClusterIPRange: 172.20.0.0/19
+    storageBackend: etcd3
+  ServiceAccountPublicKeys: |
+    -----BEGIN RSA PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxd4HL1MxJ+4NqjtsA0U+
+    gU8OLE21O0GAUHdk/Vpud9NGcA/zykBtC8mxT+Gy84ktU7EwShf11UdCXhqm1pRt
+    hm0H6CrMec/8ISwLtHkGHRAsvWzNUnRFcSCAyvUon0CMAvGxsnGMNH6GDynYTmWy
+    9nyO14XabtR7y6fC83wqbBgSMuCpC0UmERPJFLYLsQvWpKwaa/fsUs3RMrR7feqe
+    VxCtnkv2NAIxyCLl2PKgU2TLfkghsUdPiBgfFzmEdn83GtO8hHLHoxEwyYb9shQo
+    x6seA+zUnYMUa3LgNcF3shSpkPQQSGJC4FPAjaNaBhpKcciy9Sc2ZCI01rQ1+A3V
+    wQIDAQAB
+    -----END RSA PUBLIC KEY-----
+Assets:
+  amd64:
+  - 631e31b3ec648f920292fdc1bde46053cca5d5c71d622678d86907d556efaea3@https://storage.googleapis.com/kubernetes-release/release/v1.25.2/bin/linux/amd64/kubelet
+  - 8639f2b9c33d38910d706171ce3d25be9b19fc139d0e3d4627f38ce84f9040eb@https://storage.googleapis.com/kubernetes-release/release/v1.25.2/bin/linux/amd64/kubectl
+  - 962100bbc4baeaaa5748cdbfce941f756b1531c2eadb290129401498bfac21e7@https://storage.googleapis.com/k8s-artifacts-cni/release/v0.9.1/cni-plugins-linux-amd64-v0.9.1.tgz
+  - 3a1322c18ee5ff4b9bd5af6b7b30c923a3eab8af1df05554f530ef8e2b24ac5e@https://github.com/containerd/containerd/releases/download/v1.6.8/containerd-1.6.8-linux-amd64.tar.gz
+  - db772be63147a4e747b4fe286c7c16a2edc4a8458bd3092ea46aaee77750e8ce@https://github.com/opencontainers/runc/releases/download/v1.1.4/runc.amd64
+  - 528ff265785b151bedbfa03fd22a8b6c1e08cba86523a7e520371f1ab9410e66@https://artifacts.k8s.io/binaries/kops/1.25.1/linux/amd64/protokube,https://github.com/kubernetes/kops/releases/download/v1.25.1/protokube-linux-amd64
+  - d188502fcab94e960184c6c87f1c222dcacbf4a30dd8d8e0070cd6e4771b622a@https://artifacts.k8s.io/binaries/kops/1.25.1/linux/amd64/channels,https://github.com/kubernetes/kops/releases/download/v1.25.1/channels-linux-amd64
+  arm64:
+  - c9348c0bae1d723a39235fc041053d9453be6b517082f066b3a089c3edbdd2ae@https://storage.googleapis.com/kubernetes-release/release/v1.25.2/bin/linux/arm64/kubelet
+  - b26aa656194545699471278ad899a90b1ea9408d35f6c65e3a46831b9c063fd5@https://storage.googleapis.com/kubernetes-release/release/v1.25.2/bin/linux/arm64/kubectl
+  - ef17764ffd6cdcb16d76401bac1db6acc050c9b088f1be5efa0e094ea3b01df0@https://storage.googleapis.com/k8s-artifacts-cni/release/v0.9.1/cni-plugins-linux-arm64-v0.9.1.tgz
+  - b114e36ecce78cef9d611416c01b784a420928c82766d6df7dc02b10d9da94cd@https://github.com/containerd/containerd/releases/download/v1.6.8/containerd-1.6.8-linux-arm64.tar.gz
+  - dbb71e737eaef454a406ce21fd021bd8f1b35afb7635016745992bbd7c17a223@https://github.com/opencontainers/runc/releases/download/v1.1.4/runc.arm64
+  - 0f2411cd7025b33ae7c91e1c633688df4838985ff86df7d128e39d10ddeea65b@https://artifacts.k8s.io/binaries/kops/1.25.1/linux/arm64/protokube,https://github.com/kubernetes/kops/releases/download/v1.25.1/protokube-linux-arm64
+  - 8d32c9373c5d00ef72f91a40d81477955e4c6fb6aefea80cc9c7d40803b14a63@https://artifacts.k8s.io/binaries/kops/1.25.1/linux/arm64/channels,https://github.com/kubernetes/kops/releases/download/v1.25.1/channels-linux-arm64
+CAs:
+  apiserver-aggregator-ca: |
+    -----BEGIN CERTIFICATE-----
+    MIIDDDCCAfSgAwIBAgIMFx4RGgh0B9B+6CL7MA0GCSqGSIb3DQEBCwUAMCIxIDAe
+    BgNVBAMTF2FwaXNlcnZlci1hZ2dyZWdhdG9yLWNhMB4XDTIyMTAxMjIyNDgzNVoX
+    DTMyMTAxMTIyNDgzNVowIjEgMB4GA1UEAxMXYXBpc2VydmVyLWFnZ3JlZ2F0b3It
+    Y2EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDbSuyUEk1Wb+Sgqab2
+    SNi+y6Fn67icLvl4iP0vGW5ulKQoKRD+bxAAMuzqYod/eVJQKJIrT5R5AE3kKfnB
+    94ZKPNG6dzjq+4SzOiUBxslqCfSs2nCOCgh9Ahc55lFC5Ogha7uP9uwlnoJ5D77J
+    aOFBPpccJcWn7oFe7Odi45C7snSn4O10Il6DzV4GoVp8ptJiiDpcWlUwoMfb0lbo
+    WTXndHeRl3MGJ0aStrVAH5rRZakJJyt+9gYUyqtNqRpu8o1nlA7NbYlQt3GRg9JM
+    GCvjB48BFcMJFKFBfusC4nQq46Cw4eRP9bmcq1DGyk6QHBlm3biFB+fbD4PYL9j0
+    RgubAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8EBTADAQH/MB0G
+    A1UdDgQWBBS53JqCiJzdpaWnLyB7mcyKivPogzANBgkqhkiG9w0BAQsFAAOCAQEA
+    subesUOZZ8mw0eRv3ajbGHqVSE5ToJPyVrBOiYq/Fx/eVd3TVpBc0LFBamnofzgs
+    Gk53RAk5D29v3gdZ8Sx2vM4cZBjCU7eXXc7MI2Ew9AMLf2BTqPe/hmdruvfZUOwS
+    FWz1gslI6qa/WmNMmtgiVpADBy4g1vLQQ5NG/wALo4AUdJNVO/ov588VdHwU/MDr
+    ZVV50R4b973hJNmo1Z1iiJz/7dRfiMt5rJoxfAVtzUWuUdMoYOdM2TRLsSVLaiCo
+    rxBm8x+tIYBZMg5vQFp5aa9BAzcnR8dRmeIZI1uspDRjq+y0kNqBzLGBpU55ybXW
+    icfbU78g+CZFE/b2v5x2KA==
+    -----END CERTIFICATE-----
+  etcd-clients-ca: |
+    -----BEGIN CERTIFICATE-----
+    MIIC/DCCAeSgAwIBAgIMFx4RGgYkGedc1yBIMA0GCSqGSIb3DQEBCwUAMBoxGDAW
+    BgNVBAMTD2V0Y2QtY2xpZW50cy1jYTAeFw0yMjEwMTIyMjQ4MzVaFw0zMjEwMTEy
+    MjQ4MzVaMBoxGDAWBgNVBAMTD2V0Y2QtY2xpZW50cy1jYTCCASIwDQYJKoZIhvcN
+    AQEBBQADggEPADCCAQoCggEBALj9CsC9PveASw2kEKTIp3UABIkbzHf3EP8fceDw
+    88Y1RcKO6V24ozw+tnE77v9E//lbt5Br42BB8QeDsbXqbvdnzuujFDUIaDbfpu7V
+    M5hIL6Eq84sA0YQH7HQi2xaLRLv9FRq7QDXYLB/WihZDIsnl5+ZgBd1vUCSYCiyO
+    cpxDYqBygwS+F7VlKab7zR3CtzmpDQdWTwLa+uqBK9ewsgveYWFxEESJY7TmM6Wq
+    SM2XWj2twuPN8zqjyfr4HprG/TfhM/wfEAhQExBR5EZwoGwk4eo76cLJU96gh7Ss
+    qJtbZ3q35PvmAFgQGgeSzHepq1pHxUImrfG9hlPoSCCrt/sCAwEAAaNCMEAwDgYD
+    VR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFD0rB8tcfxpi
+    wwy/fQm6TcV4t9cDMA0GCSqGSIb3DQEBCwUAA4IBAQAWgc5lBxRlsqqJ/S8WhNXj
+    rH7hLvJZIkT+26ALthZp7Op8mg6nq83cTEmHaaoy4Ej3hQFKwnuCNwqGpaekfXSw
+    ekKx9XIH0mQZjtJU7y1JLw7E8Ktxdz4vfcdV+a58FMCQjdd1EtBTQiyqjVTZ5ACj
+    QU6WWsIC+7D7MS2FRiDQuOt70nOtpJkOWgERZGIRK6u24LcIAScYaBvYRanhp/Dm
+    ohehhZKxgFQn4DIFAnEZJ20ywPjQEKrTc8iS4SysW45SQo1KFty/Gy5GD374VIMY
+    IRSvSd+MgL8i7LK91VFtQux/h2vYt7sUJgbqP3m13DYcWnyGuZdmNmboJflWIpDG
+    -----END CERTIFICATE-----
+  etcd-manager-ca-events: |
+    -----BEGIN CERTIFICATE-----
+    MIIDCjCCAfKgAwIBAgIMFx4RGgVqxVb5hprvMA0GCSqGSIb3DQEBCwUAMCExHzAd
+    BgNVBAMTFmV0Y2QtbWFuYWdlci1jYS1ldmVudHMwHhcNMjIxMDEyMjI0ODM1WhcN
+    MzIxMDExMjI0ODM1WjAhMR8wHQYDVQQDExZldGNkLW1hbmFnZXItY2EtZXZlbnRz
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsrBimpQv2PqZUfHGRnJQ
+    b1GDq8qe7QiCGcMJp63MDO6zY7dw5ciQMqzt2Lo4oVcW+94Qvd6mlnQi+5f50ARn
+    RQZbw72zEYnXL07/Iztsrvj5Yo8vbWIiBHNyJ03YLRq0pmP5ZZUJUoxCFkytRqyj
+    kjGZIE1uWlgQ5Zm7DEwSrGZYqgGM699O1I/Ss8MnwgyRg/PgIgxBL+P7jfFJhaU1
+    sc/VzKYNSJ6wdP93phKAKRqUGSXhiD4naoFL1dD1JlUgVRLk04m6WOBltwNSBVIJ
+    9q0AOqCnxk4tCPIBbhy0ArcjuBLeX3gbROjYJC8ToUrprXDMkKZ5i3O4wOq1onPX
+    YQIDAQABo0IwQDAOBgNVHQ8BAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAdBgNV
+    HQ4EFgQUtG6jtUYy9z2GUrbx82fvz9hEodYwDQYJKoZIhvcNAQELBQADggEBABTk
+    zTJ1b928AOYBzZfhZRR9YVviWZcJDcdtSptSAXP0LxMdjZcZXaV2RJZ6L4Hu5jH3
+    MJ7NoLKqPZCfztKA9t0d4yigd7o0ngeFgNU4eJFYG9o6gZGkbqh0Sr4hfL4F1Nok
+    rcYvbUgDci/VQQ8WSolXU3mwQSuLLCHGQWRr931xWV354JyV2oH2/WrU8155ax+u
+    dYj5FtxkRCujBVeL++Xfj2ZVlVztzHKDSAEuKVL4i1dY6+hDn/isuUU4kK/IL4Hq
+    QBQF+rAgdS85SRWpV8+AOI7JAosHQUeV70QBEKUA3XvcrhkV2VI3XhGOJ3LRBrur
+    WW5PxNn0c8xsq2tN8k4=
+    -----END CERTIFICATE-----
+  etcd-manager-ca-main: |
+    -----BEGIN CERTIFICATE-----
+    MIIDBjCCAe6gAwIBAgIMFx4RGgWtB/gWGsuDMA0GCSqGSIb3DQEBCwUAMB8xHTAb
+    BgNVBAMTFGV0Y2QtbWFuYWdlci1jYS1tYWluMB4XDTIyMTAxMjIyNDgzNVoXDTMy
+    MTAxMTIyNDgzNVowHzEdMBsGA1UEAxMUZXRjZC1tYW5hZ2VyLWNhLW1haW4wggEi
+    MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDKRGnodueO+PJXvCZRbrh1cNCA
+    8vY8koiFGrN4FDcjRKHMamTRYUN/skiiipjtUz4SJaIqIrDL+qxJCWRkjLE4KvnV
+    94E+hTQBKvDu79i3swhMjvE3oPQbZkqfezCmmK0QHF4nDXumEgejIS4Xaj5FyVRM
+    qOZFac1xg6EUUTanj46anYTgVhG6+bLXz1X+CLP6sXD5GhT8ByfPwOmpOdFqsJML
+    yBf2ckLYprhQ8fJjumW/2RZZPzzXmd03jfaYMS3XXSREWsPx2K/wlfuhDSRgC3oV
+    fdcxEihsC7t0RciFzTyYboXHET5BMIQ2MY4EAwNeLXyQiemY8wIePgZb03BzAgMB
+    AAGjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQW
+    BBTSdSt7yXeBsDkuD/A9jhRMdzkV5zANBgkqhkiG9w0BAQsFAAOCAQEAfC5maIMC
+    bLqoDntQ4jvE2nsjE+Tn+NO2gPaHE5j2w4cEZpwGnIni5CKEciaaEwc7l3R4EqwI
+    MARHL33LMJpsLjPL84l15Qb5TiSeBtUMB/Bw4pjVMEJq5HNPCvsUBeYG8UIkWYje
+    8qxmSXdk8ZTyIy19yFguqzYsgMdR7jV5zUoPRNhNL2Klr/XyPOHeEURUlUPyH7Tk
+    I9i9Q4gV9MXMSZ1DAs4KHC18NeSSVB/nZr/VXYtTzaN7cxmtRE1ykfnpnv+bc3YL
+    tl31ava8eZQYaG8iIuL5drDWEeVgIzyyU2BnVLSJin5WHQmnlfsHtOU5zog4PT3F
+    BWI7C0+/kIFQ9g==
+    -----END CERTIFICATE-----
+  etcd-peers-ca-events: |
+    -----BEGIN CERTIFICATE-----
+    MIIDBjCCAe6gAwIBAgIMFx4RGgZwZJyOIdBBMA0GCSqGSIb3DQEBCwUAMB8xHTAb
+    BgNVBAMTFGV0Y2QtcGVlcnMtY2EtZXZlbnRzMB4XDTIyMTAxMjIyNDgzNVoXDTMy
+    MTAxMTIyNDgzNVowHzEdMBsGA1UEAxMUZXRjZC1wZWVycy1jYS1ldmVudHMwggEi
+    MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCm7+vzvrt6CYsORZNpF0M2dKSG
+    6dWXN1d1hMQ6lWQaKIbRtBLV238itFBGoqXXV0+gXLah9benfmf3ZHowo9wFm9Oh
+    5dKNDCC4vb2pNXCPjjE6HySO3kzl6vr36Ub4XEyAxSZ1tQuyhBHmhU/YfQHm03yC
+    /3tRCMNxKR+VPWczv2tHqpk1afbL/2+cxtUyX05Des+3XIiDvpxMQq/CYb4rhNzg
+    FE7NDSqTvMfvh4mMyGsN9W7Pdnma10dv0QJwsm+llDxS7ahCMO3mBs3q9liXPuTv
+    Hf2r4tROQyXM+pR0CdHlpG/JRt3c6Xz1SUIixn5uTsqcbfW/eXej1t7q67ZdAgMB
+    AAGjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQW
+    BBQNxvRws7N4z8tDBWcudZyruyRgnDANBgkqhkiG9w0BAQsFAAOCAQEAFLuTO2mt
+    QM5B9m6GPx/IErSAvASnIcD0wzyorHDhX0tKtu9Rt+2/9W3ZWevnT+hLWj/dwtyQ
+    G3CM7Pcc8szqCgaKw200QX5smAJGWjFcGHUwN/qIb8gFiTWbB2YN7bYc/gKEuouw
+    GRgz6kt6Am2ClY2yhj/5Ar+pBHMt+RA6LgXAvAtKPpGcriZ+dJg5p6O6n/Lh4AIi
+    bl4EJCPYKgC7o8gDTUC7YEaHDGIq5HD0mTvlTiAGoRSjFnBZSBz+fBS8Lh4KiLLb
+    B0H87DN/OadX9mdYqxgeiIAXrxlubs5R3u/u/3r9exGTUC8nEy0++zR2qJX1kmff
+    WWLo996JOxOU6g==
+    -----END CERTIFICATE-----
+  etcd-peers-ca-main: |
+    -----BEGIN CERTIFICATE-----
+    MIIDAjCCAeqgAwIBAgIMFx4RGgZN+NAJL8UXMA0GCSqGSIb3DQEBCwUAMB0xGzAZ
+    BgNVBAMTEmV0Y2QtcGVlcnMtY2EtbWFpbjAeFw0yMjEwMTIyMjQ4MzZaFw0zMjEw
+    MTEyMjQ4MzZaMB0xGzAZBgNVBAMTEmV0Y2QtcGVlcnMtY2EtbWFpbjCCASIwDQYJ
+    KoZIhvcNAQEBBQADggEPADCCAQoCggEBAOMJBRBMHMcVb4Mg00i4xow2vkVj+GUG
+    bLYue/y/6cSV4M9hdBEaqv/ty5pkbzHi/ZZ5avXnLnEZyXBESHkQONVTR8jzBHyb
+    AImw4AnfueaMPQLhGVwEtdeho/cMf7QB+TTo982saCLvDB/IW9mferwbfWcFQv8+
+    y/Ay2myt1gZ9NQJ2Humhz7fOZtJfmp8PS05UDTio9OH0P7SgVs56csJ7mp26QfPD
+    AeoR30pd33BYcx9PzvafLCLI3xQhvKXs33t0TCa3hbYvuXbPzkrnIHLqAWvLEx3w
+    ce6iCTsVpsd7fuNBiVClfZawi0YcTXFv4Is2nNOArMYMe//ya71Cwv0CAwEAAaNC
+    MEAwDgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFIkP
+    L59UkgCZkCmuAK6twYSHuM6WMA0GCSqGSIb3DQEBCwUAA4IBAQDUefGONZ0W5IRA
+    k8qBDWcZtIN1s8vQmXFiufbCqE4I3aT5DX7EM6Z8XmgEaoCt/CWX3OybmtwMir0V
+    y1BVhMxrVK1hBSlmUlul1h9YlmlQy5Sw+TDfteLxsSdd9M3/3XcWd+bnKSdgWTXy
+    sdtP9BOPJr/NzOznWrxw+HL1tzYe5+9SUkIc8KcpTaH8lU/We0A27RowyOExqs8I
+    LqBP9PlAe4bTDetiWhH03bhyU8zH49hS0BfLP1Z6bHS/HwYVd20jBGc1LCUHVYgA
+    P7YnJkgIXwx35XqoV7H+LzdKiNYtTjFoLOpanIJAxVnvfgv7hh9E6DXQnEFc49O/
+    s/+grYz9
+    -----END CERTIFICATE-----
+  kubernetes-ca: |
+    -----BEGIN CERTIFICATE-----
+    MIIC+DCCAeCgAwIBAgIMFx4RGgsOIriNO1fxMA0GCSqGSIb3DQEBCwUAMBgxFjAU
+    BgNVBAMTDWt1YmVybmV0ZXMtY2EwHhcNMjIxMDEyMjI0ODM1WhcNMzIxMDExMjI0
+    ODM1WjAYMRYwFAYDVQQDEw1rdWJlcm5ldGVzLWNhMIIBIjANBgkqhkiG9w0BAQEF
+    AAOCAQ8AMIIBCgKCAQEAwhjEFxCn3nFawsVZvXVM2mLHvBRTHy9zGvuK4Agiryn2
+    fV92LMMu5HuZmihMH8A/pNn1nFMyUHj3TeScnCeV+m9ASokAt/QFE6BIyOSjgOWL
+    9U7SCVyDwAWqHI0ZvE/OBtEFXozoDQFXdgEr7QCnufI0+mdbc3QCl+612m5EudPh
+    J7CzfSl2DnmXsGrmZTdpwwI4pS+Pb2Q7AIbi0EHdEn/cm8CH7FVBCqnCzdFX2154
+    JFVUsqOiQPeNI6U/zR+hD4avwEA2pQQvccXE8zd+uJ0g9D+IwrE2x4yehK7jQOCn
+    pyum95tXh9IpnpXabI48e3qT76Oi/1GRAT7EOMhWBwIDAQABo0IwQDAOBgNVHQ8B
+    Af8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUJQjpcii4jga1mnEz
+    17reltpcdIUwDQYJKoZIhvcNAQELBQADggEBAERzAnHfQIkzIuZTwFymGG5CuACx
+    L9HjHbfJzN5picdjhygrz7JNvNPi55JGVG39A8ZYjsztY1oV46uKVUPz+UY+VCzv
+    SASTvkjOhSvRGBAigN8UD6vQ/N7CafSfSkhjQFXyfM9kOoxSIABPkw7Ly2LyOvzW
+    xQBZ5y6panIJtlYodJhPBgfgvwYO05Du7YX2jXHN6V8t7/2t1Lpi1w/YoxEbjLyQ
+    CwsxWrqadz+43wYfsdmZTQk73OXlGie0vg1SHnTOmVsy5bmtuLSdn7MBkk2FJYvq
+    tcKgN+es80DYAhK+yYH2OmBoPESFEPujISo1WI3c5zYzaoCDvCf8s+kr6t4=
+    -----END CERTIFICATE-----
+ClusterName: kops.rajmehta.live
+DefaultMachineType: t2.medium
+FileAssets:
+- content: |
+    apiVersion: kubescheduler.config.k8s.io/v1beta2
+    clientConnection:
+      kubeconfig: /var/lib/kube-scheduler/kubeconfig
+    kind: KubeSchedulerConfiguration
+  path: /var/lib/kube-scheduler/config.yaml
+Hooks:
+- null
+- null
+KeypairIDs:
+  apiserver-aggregator-ca: "7154503760934050597993718523"
+  etcd-clients-ca: "7154503760767437301203017800"
+  etcd-manager-ca-events: "7154503760715271451393301231"
+  etcd-manager-ca-main: "7154503760733922059592846211"
+  etcd-peers-ca-events: "7154503760788911541509541953"
+  etcd-peers-ca-main: "7154503760779222866153424151"
+  kubernetes-ca: "7154503761121542516458084337"
+  service-account: "7154503761247118980005830919"
+KubeletConfig:
+  anonymousAuth: false
+  cgroupDriver: systemd
+  cgroupRoot: /
+  cloudProvider: external
+  clusterDNS: 172.20.0.10
+  clusterDomain: cluster.local
+  enableDebuggingHandlers: true
+  evictionHard: memory.available<100Mi,nodefs.available<10%,nodefs.inodesFree<5%,imagefs.available<10%,imagefs.inodesFree<5%
+  featureGates:
+    CSIMigrationAWS: "true"
+    InTreePluginAWSUnregister: "true"
+  kubeconfigPath: /var/lib/kubelet/kubeconfig
+  logLevel: 2
+  nodeLabels:
+    kops.k8s.io/kops-controller-pki: ""
+    node-role.kubernetes.io/control-plane: ""
+    node.kubernetes.io/exclude-from-external-load-balancers: ""
+  podInfraContainerImage: registry.k8s.io/pause:3.6@sha256:3d380ca8864549e74af4b29c10f9cb0956236dfb01c40ca076fb6c37253234db
+  podManifestPath: /etc/kubernetes/manifests
+  protectKernelDefaults: true
+  registerSchedulable: false
+  shutdownGracePeriod: 0s
+  shutdownGracePeriodCriticalPods: 0s
+UpdatePolicy: automatic
+channels:
+- s3://terraform-kops-g1/kops.rajmehta.live/addons/bootstrap-channel.yaml
+containerdConfig:
+  logLevel: info
+  runc:
+    version: 1.1.4
+  version: 1.6.8
+etcdManifests:
+- s3://terraform-kops-g1/kops.rajmehta.live/manifests/etcd/main-master-us-east-1b.yaml
+- s3://terraform-kops-g1/kops.rajmehta.live/manifests/etcd/events-master-us-east-1b.yaml
+staticManifests:
+- key: kube-apiserver-healthcheck
+  path: manifests/static/kube-apiserver-healthcheck.yaml
+useInstanceIDForNodeName: true

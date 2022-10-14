@@ -1,30 +1,6 @@
-# data "aws_subnet" "get_aws_vpc" {
-#     filter {
-#         name = "tag:Name"
-#         values = var.aws_vpc_tag
-#     }
-# }
-
-# resource "aws_db_subnet_group" "db_subnet_group" {
-#     name = "db_subnet"
-#     subnet_ids = ["${data.aws_subnet.get_aws_vpc[0].id}", "${data.aws_subnet.get_aws_vpc[1].id}", "${data.aws_subnet.get_aws_vpc[2].id}"]
-# }
-
-data "aws_subnet_ids" "list_ids" {
-    vpc_id = var.aws_vpc_id
-}
-
-data "aws_subnet" "each_subnet" {
-    # for_each = data.aws_subnet_ids.list_ids.ids
-    # id = each.value
-
-    count = "3"
-    id    = "${tolist(data.aws_subnet_ids.list_ids.ids)[count.index]}"
-}
-
 resource "aws_db_subnet_group" "db_subnet_group" {
     name = "db_subnet"
-    subnet_ids = "${data.aws_subnet.each_subnet.*.id}"
+    subnet_ids = ["${var.subnet_id[0]}", "${var.subnet_id[1]}", "${var.subnet_id[2]}"]
 }
 
 
@@ -35,6 +11,7 @@ resource "aws_db_instance" "rds_instance" {
     name = var.rds_name
     username = var.rds_username
     password = var.rds_password
+    skip_final_snapshot = true
     db_subnet_group_name = aws_db_subnet_group.db_subnet_group.name
     tags = {
         Name = var.rds_tag

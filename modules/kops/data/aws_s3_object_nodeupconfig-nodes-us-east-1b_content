@@ -1,0 +1,70 @@
+Assets:
+  amd64:
+  - 631e31b3ec648f920292fdc1bde46053cca5d5c71d622678d86907d556efaea3@https://storage.googleapis.com/kubernetes-release/release/v1.25.2/bin/linux/amd64/kubelet
+  - 8639f2b9c33d38910d706171ce3d25be9b19fc139d0e3d4627f38ce84f9040eb@https://storage.googleapis.com/kubernetes-release/release/v1.25.2/bin/linux/amd64/kubectl
+  - 962100bbc4baeaaa5748cdbfce941f756b1531c2eadb290129401498bfac21e7@https://storage.googleapis.com/k8s-artifacts-cni/release/v0.9.1/cni-plugins-linux-amd64-v0.9.1.tgz
+  - 3a1322c18ee5ff4b9bd5af6b7b30c923a3eab8af1df05554f530ef8e2b24ac5e@https://github.com/containerd/containerd/releases/download/v1.6.8/containerd-1.6.8-linux-amd64.tar.gz
+  - db772be63147a4e747b4fe286c7c16a2edc4a8458bd3092ea46aaee77750e8ce@https://github.com/opencontainers/runc/releases/download/v1.1.4/runc.amd64
+  arm64:
+  - c9348c0bae1d723a39235fc041053d9453be6b517082f066b3a089c3edbdd2ae@https://storage.googleapis.com/kubernetes-release/release/v1.25.2/bin/linux/arm64/kubelet
+  - b26aa656194545699471278ad899a90b1ea9408d35f6c65e3a46831b9c063fd5@https://storage.googleapis.com/kubernetes-release/release/v1.25.2/bin/linux/arm64/kubectl
+  - ef17764ffd6cdcb16d76401bac1db6acc050c9b088f1be5efa0e094ea3b01df0@https://storage.googleapis.com/k8s-artifacts-cni/release/v0.9.1/cni-plugins-linux-arm64-v0.9.1.tgz
+  - b114e36ecce78cef9d611416c01b784a420928c82766d6df7dc02b10d9da94cd@https://github.com/containerd/containerd/releases/download/v1.6.8/containerd-1.6.8-linux-arm64.tar.gz
+  - dbb71e737eaef454a406ce21fd021bd8f1b35afb7635016745992bbd7c17a223@https://github.com/opencontainers/runc/releases/download/v1.1.4/runc.arm64
+CAs:
+  kubernetes-ca: |
+    -----BEGIN CERTIFICATE-----
+    MIIC+DCCAeCgAwIBAgIMFx4RGgsOIriNO1fxMA0GCSqGSIb3DQEBCwUAMBgxFjAU
+    BgNVBAMTDWt1YmVybmV0ZXMtY2EwHhcNMjIxMDEyMjI0ODM1WhcNMzIxMDExMjI0
+    ODM1WjAYMRYwFAYDVQQDEw1rdWJlcm5ldGVzLWNhMIIBIjANBgkqhkiG9w0BAQEF
+    AAOCAQ8AMIIBCgKCAQEAwhjEFxCn3nFawsVZvXVM2mLHvBRTHy9zGvuK4Agiryn2
+    fV92LMMu5HuZmihMH8A/pNn1nFMyUHj3TeScnCeV+m9ASokAt/QFE6BIyOSjgOWL
+    9U7SCVyDwAWqHI0ZvE/OBtEFXozoDQFXdgEr7QCnufI0+mdbc3QCl+612m5EudPh
+    J7CzfSl2DnmXsGrmZTdpwwI4pS+Pb2Q7AIbi0EHdEn/cm8CH7FVBCqnCzdFX2154
+    JFVUsqOiQPeNI6U/zR+hD4avwEA2pQQvccXE8zd+uJ0g9D+IwrE2x4yehK7jQOCn
+    pyum95tXh9IpnpXabI48e3qT76Oi/1GRAT7EOMhWBwIDAQABo0IwQDAOBgNVHQ8B
+    Af8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUJQjpcii4jga1mnEz
+    17reltpcdIUwDQYJKoZIhvcNAQELBQADggEBAERzAnHfQIkzIuZTwFymGG5CuACx
+    L9HjHbfJzN5picdjhygrz7JNvNPi55JGVG39A8ZYjsztY1oV46uKVUPz+UY+VCzv
+    SASTvkjOhSvRGBAigN8UD6vQ/N7CafSfSkhjQFXyfM9kOoxSIABPkw7Ly2LyOvzW
+    xQBZ5y6panIJtlYodJhPBgfgvwYO05Du7YX2jXHN6V8t7/2t1Lpi1w/YoxEbjLyQ
+    CwsxWrqadz+43wYfsdmZTQk73OXlGie0vg1SHnTOmVsy5bmtuLSdn7MBkk2FJYvq
+    tcKgN+es80DYAhK+yYH2OmBoPESFEPujISo1WI3c5zYzaoCDvCf8s+kr6t4=
+    -----END CERTIFICATE-----
+ClusterName: kops.rajmehta.live
+DefaultMachineType: t2.medium
+Hooks:
+- null
+- null
+KeypairIDs:
+  kubernetes-ca: "7154503761121542516458084337"
+KubeletConfig:
+  anonymousAuth: false
+  cgroupDriver: systemd
+  cgroupRoot: /
+  cloudProvider: external
+  clusterDNS: 172.20.0.10
+  clusterDomain: cluster.local
+  enableDebuggingHandlers: true
+  evictionHard: memory.available<100Mi,nodefs.available<10%,nodefs.inodesFree<5%,imagefs.available<10%,imagefs.inodesFree<5%
+  featureGates:
+    CSIMigrationAWS: "true"
+    InTreePluginAWSUnregister: "true"
+  kubeconfigPath: /var/lib/kubelet/kubeconfig
+  logLevel: 2
+  nodeLabels:
+    node-role.kubernetes.io/node: ""
+  podInfraContainerImage: registry.k8s.io/pause:3.6@sha256:3d380ca8864549e74af4b29c10f9cb0956236dfb01c40ca076fb6c37253234db
+  podManifestPath: /etc/kubernetes/manifests
+  protectKernelDefaults: true
+  shutdownGracePeriod: 0s
+  shutdownGracePeriodCriticalPods: 0s
+UpdatePolicy: automatic
+channels:
+- s3://terraform-kops-g1/kops.rajmehta.live/addons/bootstrap-channel.yaml
+containerdConfig:
+  logLevel: info
+  runc:
+    version: 1.1.4
+  version: 1.6.8
+useInstanceIDForNodeName: true

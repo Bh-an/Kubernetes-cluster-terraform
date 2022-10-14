@@ -5,3 +5,7 @@ output "vpc_id" {
 output "route_table_id" {
     value = aws_route_table.routetable_block.id
 }
+
+output "subnet_id" {
+    value = aws_subnet.subnet_block[*].id
+}

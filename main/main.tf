@@ -30,21 +30,11 @@ module "aws_vpc" {
     routetable_tag = var.aws_routetable_tag
 }
 
-# data "aws_vpc" "get_cluster_vpc" {
-#     filter {
-#         name = "tag:Name"
-#         values = [var.cluster_vpc_tag]
-#     }
-# }
-
-# data "aws_vpc" "get_aws_vpc" {
-#     filter {
-#         name = "tag:Name"
-#         values = [var.aws_vpc_tag]
-#     }
-# }
-
 module "rds" {
+    depends_on = [
+        module.aws_vpc
+    ]
+
     source = "../modules/rds"
 
     rds_allocated_storage = var.rds_allocated_storage
@@ -54,37 +44,12 @@ module "rds" {
     rds_username = var.rds_username
     rds_password = var.rds_password
     rds_tag = var.rds_tag
-    #aws_vpc_id = data.aws_vpc.get_cluster_vpc.id
-    aws_vpc_id = module.aws_vpc.vpc_id
+    subnet_block_tag = var.aws_subnet_block_tag
+    subnet_id = module.aws_vpc.subnet_id
 }
-
-
-# data "aws_route_table" "get_cluster_route_table" {
-#     filter {
-#         name = "tag:Name"
-#         values = var.cluster_routetable_tag
-#     }
-# }
-
-# data "aws_route_table" "get_aws_route_table" {
-#     filter {
-#         name = "tag:Name"
-#         values = var.aws_routetable_tag
-#     }
-# }
-
 
 module "vpc_peering" {
     source = "../modules/vpc_peering"
-
-    # requestor_vpc_id = data.aws_vpc.get_cluster_vpc.id
-    # acceptor_vpc_id = data.aws_vpc.get_aws_vpc.id
-
-    # requestor_route_table_id = data.aws_route_table.get_cluster_route_table.route_table_id
-    # requestor_cidr_block = var.cluster_vpc_cidr_block
-
-    # acceptor_route_table_id = data.aws_route_table.get_aws_route_table.route_table_id
-    # acceptor_cidr_block = var.aws_vpc_cidr_block
 
     requestor_vpc_id = module.cluster_vpc.vpc_id
     acceptor_vpc_id = module.aws_vpc.vpc_id
@@ -96,6 +61,6 @@ module "vpc_peering" {
     acceptor_cidr_block = var.aws_vpc_cidr_block
 }
 
-# module "kops" {
-#     source = "../modules/kops"
-# }
+module "kops" {
+    source = "../modules/kops"
+}
