@@ -1,3 +1,16 @@
+variable "s3_bucket_name" {
+
+}
+
+variable "subdomain_value" {
+    
+}
+
+variable "main_domain_value" {
+    
+}
+
+
 variable "cluster_vpc_cidr_block" {
 
 }
