@@ -9,7 +9,7 @@ NODE_SIZE="t2.medium"
 MASTER_SIZE="t2.medium"
 SSH_PUB_KEY_LOCATION="~/CSYE7125/id_rsa.pub"
 
-while getopts 'n:b:c:e:' OPTION; do
+while getopts 'n:b:c:e:v:s:' OPTION; do
   case "$OPTION" in
     n)
       CLUSTER_NAME="$OPTARG"
@@ -30,6 +30,14 @@ while getopts 'n:b:c:e:' OPTION; do
       SSH_PUB_KEY_LOCATION="$OPTARG"
       echo "Path to ssh-key: $SSH_PUB_KEY_LOCATION"
       ;;
+    v)
+      VPC="$OPTARG"
+      echo "VPC ID: $VPC"
+      ;;
+    s)
+      SUBNETS="$OPTARG"
+      echo "SUBNETS: $SUBNETS"
+      ;;
     ?)
       echo "script usage: create_cluster [-c NEW_KEY_PATH] [-n CLUSTER_NAME] [-e EXISTING_KEY_PATH] []" >&2
       exit 1
@@ -37,10 +45,6 @@ while getopts 'n:b:c:e:' OPTION; do
   esac
 
 done
-
-
-# echo "Enter a name for kops cluster:"
-# read CLUSTER_NAME
 
 kops create cluster \
 --name  ${CLUSTER_NAME} \
@@ -54,8 +58,10 @@ kops create cluster \
 --master-size=${MASTER_SIZE} \
 --bastion="true" \
 --ssh-public-key=${SSH_PUB_KEY_LOCATION} \
+--vpc=${VPC} \
+--subnets=${SUBNETS} \
 --networking amazonvpc \
---out=modules/kops/ \
+--out=. \
 --target=terraform
 
 echo "Bastion DNS Name:"
