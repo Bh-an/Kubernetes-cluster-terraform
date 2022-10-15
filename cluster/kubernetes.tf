@@ -10,18 +10,18 @@ locals {
   masters_role_name             = aws_iam_role.masters-kops-prd-aws-applicationbhan-me.name
   node_autoscaling_group_ids    = [aws_autoscaling_group.nodes-us-east-1a-kops-prd-aws-applicationbhan-me.id, aws_autoscaling_group.nodes-us-east-1b-kops-prd-aws-applicationbhan-me.id, aws_autoscaling_group.nodes-us-east-1c-kops-prd-aws-applicationbhan-me.id]
   node_security_group_ids       = [aws_security_group.nodes-kops-prd-aws-applicationbhan-me.id]
-  node_subnet_ids               = ["subnet-055eef2650a320cb4", "subnet-0903c7967c6387123", "subnet-0a7f83cf4ce1b81b4"]
+  node_subnet_ids               = ["subnet-05328538a8103b74a", "subnet-06400199a83a9a700", "subnet-0f06152b59216aec5"]
   nodes_role_arn                = aws_iam_role.nodes-kops-prd-aws-applicationbhan-me.arn
   nodes_role_name               = aws_iam_role.nodes-kops-prd-aws-applicationbhan-me.name
   region                        = "us-east-1"
-  subnet_ids                    = ["subnet-055eef2650a320cb4", "subnet-0903c7967c6387123", "subnet-0a7f83cf4ce1b81b4"]
-  subnet_us-east-1a_id          = "subnet-055eef2650a320cb4"
-  subnet_us-east-1b_id          = "subnet-0903c7967c6387123"
-  subnet_us-east-1c_id          = "subnet-0a7f83cf4ce1b81b4"
-  subnet_utility-us-east-1a_id  = "subnet-055eef2650a320cb4"
-  subnet_utility-us-east-1b_id  = "subnet-0903c7967c6387123"
-  subnet_utility-us-east-1c_id  = "subnet-0a7f83cf4ce1b81b4"
-  vpc_id                        = "vpc-022fe7d73ed98b002"
+  subnet_ids                    = ["subnet-05328538a8103b74a", "subnet-06400199a83a9a700", "subnet-07284c272536fdc8c", "subnet-09608b713a473a13b", "subnet-0a62bf27df1bd702d", "subnet-0f06152b59216aec5"]
+  subnet_us-east-1a_id          = "subnet-05328538a8103b74a"
+  subnet_us-east-1b_id          = "subnet-06400199a83a9a700"
+  subnet_us-east-1c_id          = "subnet-0f06152b59216aec5"
+  subnet_utility-us-east-1a_id  = "subnet-09608b713a473a13b"
+  subnet_utility-us-east-1b_id  = "subnet-07284c272536fdc8c"
+  subnet_utility-us-east-1c_id  = "subnet-0a62bf27df1bd702d"
+  vpc_id                        = "vpc-06020360e470f9e64"
 }
 
 output "bastion_autoscaling_group_ids" {
@@ -69,7 +69,7 @@ output "node_security_group_ids" {
 }
 
 output "node_subnet_ids" {
-  value = ["subnet-055eef2650a320cb4", "subnet-0903c7967c6387123", "subnet-0a7f83cf4ce1b81b4"]
+  value = ["subnet-05328538a8103b74a", "subnet-06400199a83a9a700", "subnet-0f06152b59216aec5"]
 }
 
 output "nodes_role_arn" {
@@ -85,35 +85,35 @@ output "region" {
 }
 
 output "subnet_ids" {
-  value = ["subnet-055eef2650a320cb4", "subnet-0903c7967c6387123", "subnet-0a7f83cf4ce1b81b4"]
+  value = ["subnet-05328538a8103b74a", "subnet-06400199a83a9a700", "subnet-07284c272536fdc8c", "subnet-09608b713a473a13b", "subnet-0a62bf27df1bd702d", "subnet-0f06152b59216aec5"]
 }
 
 output "subnet_us-east-1a_id" {
-  value = "subnet-055eef2650a320cb4"
+  value = "subnet-05328538a8103b74a"
 }
 
 output "subnet_us-east-1b_id" {
-  value = "subnet-0903c7967c6387123"
+  value = "subnet-06400199a83a9a700"
 }
 
 output "subnet_us-east-1c_id" {
-  value = "subnet-0a7f83cf4ce1b81b4"
+  value = "subnet-0f06152b59216aec5"
 }
 
 output "subnet_utility-us-east-1a_id" {
-  value = "subnet-055eef2650a320cb4"
+  value = "subnet-09608b713a473a13b"
 }
 
 output "subnet_utility-us-east-1b_id" {
-  value = "subnet-0903c7967c6387123"
+  value = "subnet-07284c272536fdc8c"
 }
 
 output "subnet_utility-us-east-1c_id" {
-  value = "subnet-0a7f83cf4ce1b81b4"
+  value = "subnet-0a62bf27df1bd702d"
 }
 
 output "vpc_id" {
-  value = "vpc-022fe7d73ed98b002"
+  value = "vpc-06020360e470f9e64"
 }
 
 provider "aws" {
@@ -177,7 +177,7 @@ resource "aws_autoscaling_group" "bastions-kops-prd-aws-applicationbhan-me" {
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = ["subnet-055eef2650a320cb4", "subnet-0903c7967c6387123", "subnet-0a7f83cf4ce1b81b4"]
+  vpc_zone_identifier = ["subnet-05328538a8103b74a", "subnet-06400199a83a9a700", "subnet-0f06152b59216aec5"]
 }
 
 resource "aws_autoscaling_group" "master-us-east-1a-masters-kops-prd-aws-applicationbhan-me" {
@@ -247,7 +247,7 @@ resource "aws_autoscaling_group" "master-us-east-1a-masters-kops-prd-aws-applica
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = ["subnet-055eef2650a320cb4"]
+  vpc_zone_identifier = ["subnet-05328538a8103b74a"]
 }
 
 resource "aws_autoscaling_group" "master-us-east-1b-masters-kops-prd-aws-applicationbhan-me" {
@@ -317,7 +317,7 @@ resource "aws_autoscaling_group" "master-us-east-1b-masters-kops-prd-aws-applica
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = ["subnet-0903c7967c6387123"]
+  vpc_zone_identifier = ["subnet-06400199a83a9a700"]
 }
 
 resource "aws_autoscaling_group" "master-us-east-1c-masters-kops-prd-aws-applicationbhan-me" {
@@ -387,7 +387,7 @@ resource "aws_autoscaling_group" "master-us-east-1c-masters-kops-prd-aws-applica
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = ["subnet-0a7f83cf4ce1b81b4"]
+  vpc_zone_identifier = ["subnet-0f06152b59216aec5"]
 }
 
 resource "aws_autoscaling_group" "nodes-us-east-1a-kops-prd-aws-applicationbhan-me" {
@@ -441,7 +441,7 @@ resource "aws_autoscaling_group" "nodes-us-east-1a-kops-prd-aws-applicationbhan-
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = ["subnet-055eef2650a320cb4"]
+  vpc_zone_identifier = ["subnet-05328538a8103b74a"]
 }
 
 resource "aws_autoscaling_group" "nodes-us-east-1b-kops-prd-aws-applicationbhan-me" {
@@ -495,7 +495,7 @@ resource "aws_autoscaling_group" "nodes-us-east-1b-kops-prd-aws-applicationbhan-
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = ["subnet-0903c7967c6387123"]
+  vpc_zone_identifier = ["subnet-06400199a83a9a700"]
 }
 
 resource "aws_autoscaling_group" "nodes-us-east-1c-kops-prd-aws-applicationbhan-me" {
@@ -549,7 +549,7 @@ resource "aws_autoscaling_group" "nodes-us-east-1c-kops-prd-aws-applicationbhan-
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = ["subnet-0a7f83cf4ce1b81b4"]
+  vpc_zone_identifier = ["subnet-0f06152b59216aec5"]
 }
 
 resource "aws_ebs_volume" "a-etcd-events-kops-prd-aws-applicationbhan-me" {
@@ -666,7 +666,7 @@ resource "aws_elb" "api-kops-prd-aws-applicationbhan-me" {
   }
   name            = "api-kops-prd-aws-applicat-g02jk6"
   security_groups = [aws_security_group.api-elb-kops-prd-aws-applicationbhan-me.id]
-  subnets         = ["subnet-055eef2650a320cb4", "subnet-0903c7967c6387123", "subnet-0a7f83cf4ce1b81b4"]
+  subnets         = ["subnet-07284c272536fdc8c", "subnet-09608b713a473a13b", "subnet-0a62bf27df1bd702d"]
   tags = {
     "KubernetesCluster"                                     = "kops.prd.aws.applicationbhan.me"
     "Name"                                                  = "api.kops.prd.aws.applicationbhan.me"
@@ -691,7 +691,7 @@ resource "aws_elb" "bastion-kops-prd-aws-applicationbhan-me" {
   }
   name            = "bastion-kops-prd-aws-appl-5o6p3s"
   security_groups = [aws_security_group.bastion-elb-kops-prd-aws-applicationbhan-me.id]
-  subnets         = ["subnet-055eef2650a320cb4", "subnet-0903c7967c6387123", "subnet-0a7f83cf4ce1b81b4"]
+  subnets         = ["subnet-07284c272536fdc8c", "subnet-09608b713a473a13b", "subnet-0a62bf27df1bd702d"]
   tags = {
     "KubernetesCluster"                                     = "kops.prd.aws.applicationbhan.me"
     "Name"                                                  = "bastion.kops.prd.aws.applicationbhan.me"
@@ -878,7 +878,7 @@ resource "aws_launch_template" "master-us-east-1a-masters-kops-prd-aws-applicati
     name = aws_iam_instance_profile.masters-kops-prd-aws-applicationbhan-me.id
   }
   image_id      = "ami-0c1704bac156af62c"
-  instance_type = "t3.large"
+  instance_type = "t3.medium"
   key_name      = aws_key_pair.kubernetes-kops-prd-aws-applicationbhan-me-c2e815b802589512237f8413d7a4b2c2.id
   lifecycle {
     create_before_destroy = true
@@ -963,7 +963,7 @@ resource "aws_launch_template" "master-us-east-1b-masters-kops-prd-aws-applicati
     name = aws_iam_instance_profile.masters-kops-prd-aws-applicationbhan-me.id
   }
   image_id      = "ami-0c1704bac156af62c"
-  instance_type = "t3.large"
+  instance_type = "t3.medium"
   key_name      = aws_key_pair.kubernetes-kops-prd-aws-applicationbhan-me-c2e815b802589512237f8413d7a4b2c2.id
   lifecycle {
     create_before_destroy = true
@@ -1048,7 +1048,7 @@ resource "aws_launch_template" "master-us-east-1c-masters-kops-prd-aws-applicati
     name = aws_iam_instance_profile.masters-kops-prd-aws-applicationbhan-me.id
   }
   image_id      = "ami-0c1704bac156af62c"
-  instance_type = "t3.large"
+  instance_type = "t3.medium"
   key_name      = aws_key_pair.kubernetes-kops-prd-aws-applicationbhan-me-c2e815b802589512237f8413d7a4b2c2.id
   lifecycle {
     create_before_destroy = true
@@ -1133,7 +1133,7 @@ resource "aws_launch_template" "nodes-us-east-1a-kops-prd-aws-applicationbhan-me
     name = aws_iam_instance_profile.nodes-kops-prd-aws-applicationbhan-me.id
   }
   image_id      = "ami-0c1704bac156af62c"
-  instance_type = "t3.large"
+  instance_type = "t3.medium"
   key_name      = aws_key_pair.kubernetes-kops-prd-aws-applicationbhan-me-c2e815b802589512237f8413d7a4b2c2.id
   lifecycle {
     create_before_destroy = true
@@ -1209,7 +1209,7 @@ resource "aws_launch_template" "nodes-us-east-1b-kops-prd-aws-applicationbhan-me
     name = aws_iam_instance_profile.nodes-kops-prd-aws-applicationbhan-me.id
   }
   image_id      = "ami-0c1704bac156af62c"
-  instance_type = "t3.large"
+  instance_type = "t3.medium"
   key_name      = aws_key_pair.kubernetes-kops-prd-aws-applicationbhan-me-c2e815b802589512237f8413d7a4b2c2.id
   lifecycle {
     create_before_destroy = true
@@ -1285,7 +1285,7 @@ resource "aws_launch_template" "nodes-us-east-1c-kops-prd-aws-applicationbhan-me
     name = aws_iam_instance_profile.nodes-kops-prd-aws-applicationbhan-me.id
   }
   image_id      = "ami-0c1704bac156af62c"
-  instance_type = "t3.large"
+  instance_type = "t3.medium"
   key_name      = aws_key_pair.kubernetes-kops-prd-aws-applicationbhan-me-c2e815b802589512237f8413d7a4b2c2.id
   lifecycle {
     create_before_destroy = true
@@ -1551,7 +1551,7 @@ resource "aws_security_group" "api-elb-kops-prd-aws-applicationbhan-me" {
     "Name"                                                  = "api-elb.kops.prd.aws.applicationbhan.me"
     "kubernetes.io/cluster/kops.prd.aws.applicationbhan.me" = "owned"
   }
-  vpc_id = "vpc-022fe7d73ed98b002"
+  vpc_id = "vpc-06020360e470f9e64"
 }
 
 resource "aws_security_group" "bastion-elb-kops-prd-aws-applicationbhan-me" {
@@ -1562,7 +1562,7 @@ resource "aws_security_group" "bastion-elb-kops-prd-aws-applicationbhan-me" {
     "Name"                                                  = "bastion-elb.kops.prd.aws.applicationbhan.me"
     "kubernetes.io/cluster/kops.prd.aws.applicationbhan.me" = "owned"
   }
-  vpc_id = "vpc-022fe7d73ed98b002"
+  vpc_id = "vpc-06020360e470f9e64"
 }
 
 resource "aws_security_group" "bastion-kops-prd-aws-applicationbhan-me" {
@@ -1573,7 +1573,7 @@ resource "aws_security_group" "bastion-kops-prd-aws-applicationbhan-me" {
     "Name"                                                  = "bastion.kops.prd.aws.applicationbhan.me"
     "kubernetes.io/cluster/kops.prd.aws.applicationbhan.me" = "owned"
   }
-  vpc_id = "vpc-022fe7d73ed98b002"
+  vpc_id = "vpc-06020360e470f9e64"
 }
 
 resource "aws_security_group" "masters-kops-prd-aws-applicationbhan-me" {
@@ -1584,7 +1584,7 @@ resource "aws_security_group" "masters-kops-prd-aws-applicationbhan-me" {
     "Name"                                                  = "masters.kops.prd.aws.applicationbhan.me"
     "kubernetes.io/cluster/kops.prd.aws.applicationbhan.me" = "owned"
   }
-  vpc_id = "vpc-022fe7d73ed98b002"
+  vpc_id = "vpc-06020360e470f9e64"
 }
 
 resource "aws_security_group" "nodes-kops-prd-aws-applicationbhan-me" {
@@ -1595,7 +1595,7 @@ resource "aws_security_group" "nodes-kops-prd-aws-applicationbhan-me" {
     "Name"                                                  = "nodes.kops.prd.aws.applicationbhan.me"
     "kubernetes.io/cluster/kops.prd.aws.applicationbhan.me" = "owned"
   }
-  vpc_id = "vpc-022fe7d73ed98b002"
+  vpc_id = "vpc-06020360e470f9e64"
 }
 
 resource "aws_security_group_rule" "from-0-0-0-0--0-ingress-tcp-22to22-bastion-elb-kops-prd-aws-applicationbhan-me" {

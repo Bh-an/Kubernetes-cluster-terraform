@@ -246,7 +246,7 @@ CloudProvider: aws
 ConfigBase: s3://bhan-csye7125-kops/kops.prd.aws.applicationbhan.me
 InstanceGroupName: master-us-east-1b
 InstanceGroupRole: Master
-NodeupConfigHash: xxjyXoSRwPtJOfAYeFBNLjignplUkqoBmHwvTXNPhOs=
+NodeupConfigHash: a9Vexb0T1gb/x1MF7VaiLosCkR9lMqCWLnSxKhW4o3E=
 
 __EOF_KUBE_ENV
 

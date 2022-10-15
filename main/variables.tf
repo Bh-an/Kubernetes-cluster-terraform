@@ -27,7 +27,11 @@ variable "aws_vpc_tag" {
 
 }
 
-variable "cluster_subnets_block" {
+variable "cluster_public_subnets_block" {
+
+}
+
+variable "cluster_private_subnets_block" {
 
 }
 
@@ -89,4 +93,12 @@ variable "rds_password" {
 
 variable "rds_tag" {
     
+}
+
+variable "region" {
+
+}
+
+variable "environment" {
+
 }

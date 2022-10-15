@@ -5,11 +5,11 @@ MASTER_ZONES="us-east-1a,us-east-1b,us-east-1c"
 ZONES="us-east-1a,us-east-1b,us-east-1c"
 BUCKET_NAME="s3://terraform-kops-g1"
 NODE_COUNT=3
-NODE_SIZE="t3.large"
-MASTER_SIZE="t3.large"
+NODE_SIZE="t3.medium"
+MASTER_SIZE="t3.medium"
 SSH_PUB_KEY_LOCATION="~/CSYE7125/id_rsa.pub"
 
-while getopts 'n:b:c:e:v:s:' OPTION; do
+while getopts 'n:b:c:e:v:s:p:' OPTION; do
   case "$OPTION" in
     n)
       CLUSTER_NAME="$OPTARG"
@@ -38,6 +38,11 @@ while getopts 'n:b:c:e:v:s:' OPTION; do
       SUBNETS="$OPTARG"
       echo "SUBNETS: $SUBNETS"
       ;;
+    p)
+      PRIV_SUBNETS="$OPTARG"
+
+      echo "PRIV_SUBNETS: $PRIV_SUBNETS"
+      ;;
     ?)
       echo "script usage: create_cluster [-c NEW_KEY_PATH] [-n CLUSTER_NAME] [-e EXISTING_KEY_PATH] [-b BUCKET_NAME] [-v VPC_ID] [-s SUBNET_IDS]" >&2
       exit 1
@@ -60,7 +65,7 @@ kops create cluster \
 --bastion="true" \
 --ssh-public-key=${SSH_PUB_KEY_LOCATION} \
 --vpc=${VPC} \
---subnets=${SUBNETS} \
+--subnets=${PRIV_SUBNETS} \
 --utility-subnets=${SUBNETS} \
 --networking amazonvpc \
 --out=. \
