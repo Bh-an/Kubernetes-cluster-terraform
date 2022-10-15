@@ -1,7 +1,7 @@
 apiVersion: kops.k8s.io/v1alpha2
 kind: Cluster
 metadata:
-  creationTimestamp: "2022-10-15T03:25:20Z"
+  creationTimestamp: "2022-10-15T06:02:43Z"
   name: kops.prd.aws.applicationbhan.me
 spec:
   api:
@@ -188,7 +188,7 @@ spec:
     registerSchedulable: false
   masterPublicName: api.kops.prd.aws.applicationbhan.me
   networkCIDR: 10.0.0.0/16
-  networkID: vpc-022fe7d73ed98b002
+  networkID: vpc-06020360e470f9e64
   networking:
     amazonvpc: {}
   nonMasqueradeCIDR: 10.0.0.0/16
@@ -199,33 +199,33 @@ spec:
   - 0.0.0.0/0
   - ::/0
   subnets:
-  - cidr: 10.0.1.0/24
-    id: subnet-055eef2650a320cb4
+  - cidr: 10.0.101.0/24
+    id: subnet-05328538a8103b74a
     name: us-east-1a
     type: Private
     zone: us-east-1a
-  - cidr: 10.0.2.0/24
-    id: subnet-0903c7967c6387123
+  - cidr: 10.0.102.0/24
+    id: subnet-06400199a83a9a700
     name: us-east-1b
     type: Private
     zone: us-east-1b
-  - cidr: 10.0.3.0/24
-    id: subnet-0a7f83cf4ce1b81b4
+  - cidr: 10.0.103.0/24
+    id: subnet-0f06152b59216aec5
     name: us-east-1c
     type: Private
     zone: us-east-1c
   - cidr: 10.0.1.0/24
-    id: subnet-055eef2650a320cb4
+    id: subnet-09608b713a473a13b
     name: utility-us-east-1a
     type: Utility
     zone: us-east-1a
   - cidr: 10.0.2.0/24
-    id: subnet-0903c7967c6387123
+    id: subnet-07284c272536fdc8c
     name: utility-us-east-1b
     type: Utility
     zone: us-east-1b
   - cidr: 10.0.3.0/24
-    id: subnet-0a7f83cf4ce1b81b4
+    id: subnet-0a62bf27df1bd702d
     name: utility-us-east-1c
     type: Utility
     zone: us-east-1c

@@ -4,7 +4,8 @@ aws_vpc_cidr_block = "10.1.0.0/16"
 cluster_vpc_tag = "cluster-vpc"
 aws_vpc_tag = "aws-vpc"
 
-cluster_subnets_block = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+cluster_public_subnets_block = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+cluster_private_subnets_block = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 aws_subnets_block = ["10.1.1.0/24", "10.1.2.0/24", "10.1.3.0/24"]
 
 azs = ["us-east-1a", "us-east-1b", "us-east-1c"]
@@ -24,3 +25,6 @@ rds_name = "tfk8rds"
 rds_username = "tfk8"
 rds_password = "tfk8password"
 rds_tag = "aws_vpc_rds"
+
+environment="k8cluster"
+region="us-east-1"
