@@ -9,3 +9,7 @@ output "route_table_id" {
 output "subnet_id" {
     value = aws_subnet.subnet_block[*].id
 }
+
+output "security_group_id" {
+    value = aws_security_group.default.id
+}

@@ -71,6 +71,7 @@ module "rds" {
     rds_tag = var.rds_tag
     subnet_block_tag = var.aws_subnet_block_tag
     subnet_id = module.aws_vpc.subnet_id
+    rds_security_group = module.aws_vpc.security_group_id
 }
 
 module "vpc_peering" {

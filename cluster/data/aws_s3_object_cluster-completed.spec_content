@@ -1,0 +1,220 @@
+apiVersion: kops.k8s.io/v1alpha2
+kind: Cluster
+metadata:
+  creationTimestamp: "2022-10-21T02:46:12Z"
+  name: kops.dev.rajmehta.live
+spec:
+  api:
+    loadBalancer:
+      class: Classic
+      type: Public
+  authorization:
+    rbac: {}
+  channel: stable
+  cloudConfig:
+    awsEBSCSIDriver:
+      enabled: false
+    manageStorageClasses: true
+  cloudProvider: aws
+  clusterDNSDomain: cluster.local
+  configBase: s3://a4-kops-state/kops.dev.rajmehta.live
+  configStore: s3://a4-kops-state/kops.dev.rajmehta.live
+  containerRuntime: containerd
+  containerd:
+    logLevel: info
+    version: 1.4.13
+  dnsZone: Z00127373N0C47SV20IFV
+  docker:
+    skipInstall: true
+  etcdClusters:
+  - backups:
+      backupStore: s3://a4-kops-state/kops.dev.rajmehta.live/backups/etcd/main
+    cpuRequest: 200m
+    etcdMembers:
+    - encryptedVolume: true
+      instanceGroup: master-us-east-1a
+      name: a
+    memoryRequest: 100Mi
+    name: main
+    version: 3.4.13
+  - backups:
+      backupStore: s3://a4-kops-state/kops.dev.rajmehta.live/backups/etcd/events
+    cpuRequest: 100m
+    etcdMembers:
+    - encryptedVolume: true
+      instanceGroup: master-us-east-1a
+      name: a
+    memoryRequest: 100Mi
+    name: events
+    version: 3.4.13
+  externalDns:
+    provider: dns-controller
+  iam:
+    allowContainerRegistry: true
+    legacy: false
+  keyStore: s3://a4-kops-state/kops.dev.rajmehta.live/pki
+  kubeAPIServer:
+    allowPrivileged: true
+    anonymousAuth: false
+    apiAudiences:
+    - kubernetes.svc.default
+    apiServerCount: 1
+    authorizationMode: Node,RBAC
+    bindAddress: 0.0.0.0
+    cloudProvider: aws
+    enableAdmissionPlugins:
+    - NamespaceLifecycle
+    - LimitRanger
+    - ServiceAccount
+    - DefaultStorageClass
+    - DefaultTolerationSeconds
+    - MutatingAdmissionWebhook
+    - ValidatingAdmissionWebhook
+    - NodeRestriction
+    - ResourceQuota
+    etcdServers:
+    - https://127.0.0.1:4001
+    etcdServersOverrides:
+    - /events#https://127.0.0.1:4002
+    image: registry.k8s.io/kube-apiserver:v1.20.0@sha256:8b8125d7a6e4225b08f04f65ca947b27d0cc86380bf09fab890cc80408230114
+    kubeletPreferredAddressTypes:
+    - InternalIP
+    - Hostname
+    - ExternalIP
+    logLevel: 2
+    requestheaderAllowedNames:
+    - aggregator
+    requestheaderExtraHeaderPrefixes:
+    - X-Remote-Extra-
+    requestheaderGroupHeaders:
+    - X-Remote-Group
+    requestheaderUsernameHeaders:
+    - X-Remote-User
+    securePort: 443
+    serviceAccountIssuer: https://api.internal.kops.dev.rajmehta.live
+    serviceAccountJWKSURI: https://api.internal.kops.dev.rajmehta.live/openid/v1/jwks
+    serviceClusterIPRange: 10.0.0.0/19
+    storageBackend: etcd3
+  kubeControllerManager:
+    allocateNodeCIDRs: true
+    attachDetachReconcileSyncPeriod: 1m0s
+    cloudProvider: aws
+    clusterCIDR: 10.0.128.0/17
+    clusterName: kops.dev.rajmehta.live
+    configureCloudRoutes: false
+    image: registry.k8s.io/kube-controller-manager:v1.20.0@sha256:00ccc3a5735e82d53bc26054d594a942fae64620a6f84018c057a519ba7ed1dc
+    leaderElection:
+      leaderElect: true
+    logLevel: 2
+    useServiceAccountCredentials: true
+  kubeDNS:
+    cacheMaxConcurrent: 150
+    cacheMaxSize: 1000
+    cpuRequest: 100m
+    domain: cluster.local
+    memoryLimit: 170Mi
+    memoryRequest: 70Mi
+    nodeLocalDNS:
+      cpuRequest: 25m
+      enabled: false
+      image: registry.k8s.io/dns/k8s-dns-node-cache:1.22.8
+      memoryRequest: 5Mi
+    provider: CoreDNS
+    serverIP: 10.0.0.10
+  kubeProxy:
+    cpuRequest: 100m
+    image: registry.k8s.io/kube-proxy:v1.20.0@sha256:40423415eebbd598d1c2660a0a38606ad1d949ea9404c405eaf25929163b479d
+    logLevel: 2
+  kubeScheduler:
+    image: registry.k8s.io/kube-scheduler:v1.20.0@sha256:beaa710325047fa9c867eff4ab9af38d9c2acec05ac5b416c708c304f76bdbef
+    leaderElection:
+      leaderElect: true
+    logLevel: 2
+  kubelet:
+    anonymousAuth: false
+    cgroupDriver: systemd
+    cgroupRoot: /
+    cloudProvider: aws
+    clusterDNS: 10.0.0.10
+    clusterDomain: cluster.local
+    enableDebuggingHandlers: true
+    evictionHard: memory.available<100Mi,nodefs.available<10%,nodefs.inodesFree<5%,imagefs.available<10%,imagefs.inodesFree<5%
+    kubeconfigPath: /var/lib/kubelet/kubeconfig
+    logLevel: 2
+    networkPluginName: cni
+    podInfraContainerImage: registry.k8s.io/pause:3.6@sha256:3d380ca8864549e74af4b29c10f9cb0956236dfb01c40ca076fb6c37253234db
+    podManifestPath: /etc/kubernetes/manifests
+    shutdownGracePeriod: 0s
+    shutdownGracePeriodCriticalPods: 0s
+  kubernetesApiAccess:
+  - 0.0.0.0/0
+  - ::/0
+  kubernetesVersion: 1.20.0
+  masterInternalName: api.internal.kops.dev.rajmehta.live
+  masterKubelet:
+    anonymousAuth: false
+    cgroupDriver: systemd
+    cgroupRoot: /
+    cloudProvider: aws
+    clusterDNS: 10.0.0.10
+    clusterDomain: cluster.local
+    enableDebuggingHandlers: true
+    evictionHard: memory.available<100Mi,nodefs.available<10%,nodefs.inodesFree<5%,imagefs.available<10%,imagefs.inodesFree<5%
+    kubeconfigPath: /var/lib/kubelet/kubeconfig
+    logLevel: 2
+    networkPluginName: cni
+    podInfraContainerImage: registry.k8s.io/pause:3.6@sha256:3d380ca8864549e74af4b29c10f9cb0956236dfb01c40ca076fb6c37253234db
+    podManifestPath: /etc/kubernetes/manifests
+    registerSchedulable: false
+    shutdownGracePeriod: 0s
+    shutdownGracePeriodCriticalPods: 0s
+  masterPublicName: api.kops.dev.rajmehta.live
+  networkCIDR: 10.0.0.0/16
+  networkID: vpc-0a783655b414b3cea
+  networking:
+    amazonvpc: {}
+  nonMasqueradeCIDR: 10.0.0.0/16
+  podCIDR: 10.0.128.0/17
+  secretStore: s3://a4-kops-state/kops.dev.rajmehta.live/secrets
+  serviceClusterIPRange: 10.0.0.0/19
+  sshAccess:
+  - 0.0.0.0/0
+  - ::/0
+  subnets:
+  - cidr: 10.0.101.0/24
+    id: subnet-013fae5821f791c04
+    name: us-east-1a
+    type: Private
+    zone: us-east-1a
+  - cidr: 10.0.102.0/24
+    id: subnet-043375fbc6882bf86
+    name: us-east-1b
+    type: Private
+    zone: us-east-1b
+  - cidr: 10.0.103.0/24
+    id: subnet-040a5a27ae3afacaa
+    name: us-east-1c
+    type: Private
+    zone: us-east-1c
+  - cidr: 10.0.1.0/24
+    id: subnet-00bc585a9c0ef3d3b
+    name: utility-us-east-1a
+    type: Utility
+    zone: us-east-1a
+  - cidr: 10.0.2.0/24
+    id: subnet-0e8364bc621d0f70e
+    name: utility-us-east-1b
+    type: Utility
+    zone: us-east-1b
+  - cidr: 10.0.3.0/24
+    id: subnet-02ce82a489f273bc3
+    name: utility-us-east-1c
+    type: Utility
+    zone: us-east-1c
+  topology:
+    bastion:
+      bastionPublicName: bastion.kops.dev.rajmehta.live
+    dns:
+      type: Public
+    masters: private
+    nodes: private

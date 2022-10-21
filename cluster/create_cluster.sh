@@ -1,10 +1,11 @@
 #!/bin/bash
 
 CLOUD="aws"
-MASTER_ZONES="us-east-1a,us-east-1b,us-east-1c"
+#MASTER_ZONES="us-east-1a,us-east-1b,us-east-1c"
+MASTER_ZONES="us-east-1a"
 ZONES="us-east-1a,us-east-1b,us-east-1c"
-BUCKET_NAME="s3://terraform-kops-g1"
-NODE_COUNT=3
+BUCKET_NAME="s3://a4-kops-state"
+NODE_COUNT=1
 NODE_SIZE="t3.medium"
 MASTER_SIZE="t3.medium"
 SSH_PUB_KEY_LOCATION="~/CSYE7125/id_rsa.pub"
@@ -75,3 +76,5 @@ echo "Bastion DNS Name:"
 echo $(aws elb --region us-east-1 --output=table describe-load-balancers|grep DNSName.\*bastion|awk '{print $4}')
 
 #  bash ../cluster/create_cluster.sh -n kops.prd.aws.applicationbhan.me -e ~/awsnewkey.pub -v vpc-022fe7d73ed98b002 -s subnet-055eef2650a320cb4,subnet-0903c7967c6387123,subnet-0a7f83cf4ce1b81b4
+# ./create_cluster.sh -n kops.dev.rajmehta.live -e ~/CSYE7125/id_rsa.pub -v vpc-0a783655b414b3cea -s subnet-00bc585a9c0ef3d3b,subnet-0e8364bc621d0f70e,subnet-02ce82a489f273bc3 -p subnet-013fae5821f791c04,subnet-043375fbc6882bf86,subnet-040a5a27ae3afacaa
+# kops delete cluster --state s3://a4-kops-state --name=kops.dev.rajmehta.live --yes

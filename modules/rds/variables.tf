@@ -33,3 +33,7 @@ variable "subnet_block_tag" {
 variable "subnet_id" {
   
 }
+
+variable "rds_security_group" {
+  
+}
