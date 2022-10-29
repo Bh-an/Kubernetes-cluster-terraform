@@ -53,6 +53,7 @@ module "aws_vpc" {
     subnet_block_tag = var.aws_subnet_block_tag
     internet_gateway_tag = var.aws_internet_gateway_tag
     routetable_tag = var.aws_routetable_tag
+    //cluster_sec_group = module.cluster_vpc.security_groups_ids
 }
 
 module "rds" {
@@ -71,6 +72,7 @@ module "rds" {
     rds_tag = var.rds_tag
     subnet_block_tag = var.aws_subnet_block_tag
     subnet_id = module.aws_vpc.subnet_id
+    rds_security_group = module.aws_vpc.security_group_id
 }
 
 module "vpc_peering" {
@@ -86,7 +88,14 @@ module "vpc_peering" {
     acceptor_cidr_block = var.aws_vpc_cidr_block
 }
 
-
+resource "aws_security_group_rule" "attach_sec" {
+    type = "ingress"
+    from_port = 3306
+    to_port = 3306
+    protocol = "tcp"
+    security_group_id = module.aws_vpc.security_group_id
+    source_security_group_id = module.cluster_vpc.default_sg_id
+}
 
 # resource "null_resource" "kops_script" {
 #     provisioner "local-exec" {

@@ -40,3 +40,34 @@ resource "aws_route" "public_internet_gateway" {
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.gateway_block.id
 }
+
+resource "aws_security_group" "default" {
+    name        = "aws-vpc-sg"
+    description = "Default SG to alllow traffic from the VPC"
+    vpc_id      = aws_vpc.vpc_block.id
+    depends_on = [
+        aws_vpc.vpc_block
+    ]
+
+    ingress {
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    # ingress {
+    #     from_port = 3306
+    #     to_port = 3306
+    #     protocol = "tcp"
+    #     //cidr_blocks = ["0.0.0.0/0"]
+    #     security_groups = var.cluster_sec_group
+    # }
+
+    egress {
+        from_port = "0"
+        to_port   = "0"
+        protocol  = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+}
