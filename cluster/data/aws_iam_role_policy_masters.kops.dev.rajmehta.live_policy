@@ -60,7 +60,7 @@
       ],
       "Effect": "Allow",
       "Resource": [
-        "arn:aws:route53:::hostedzone/Z00127373N0C47SV20IFV"
+        "arn:aws:route53:::hostedzone/Z0224892ZI1GZ1PWVI1H"
       ]
     },
     {

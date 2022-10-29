@@ -10,18 +10,18 @@ locals {
   masters_role_name             = aws_iam_role.masters-kops-dev-rajmehta-live.name
   node_autoscaling_group_ids    = [aws_autoscaling_group.nodes-us-east-1a-kops-dev-rajmehta-live.id, aws_autoscaling_group.nodes-us-east-1b-kops-dev-rajmehta-live.id, aws_autoscaling_group.nodes-us-east-1c-kops-dev-rajmehta-live.id]
   node_security_group_ids       = [aws_security_group.nodes-kops-dev-rajmehta-live.id]
-  node_subnet_ids               = ["subnet-013fae5821f791c04", "subnet-040a5a27ae3afacaa", "subnet-043375fbc6882bf86"]
+  node_subnet_ids               = ["subnet-02fb23cd77f8b1e90", "subnet-0c50b7635be4ce0f0", "subnet-0ed3fa3759addb26f"]
   nodes_role_arn                = aws_iam_role.nodes-kops-dev-rajmehta-live.arn
   nodes_role_name               = aws_iam_role.nodes-kops-dev-rajmehta-live.name
   region                        = "us-east-1"
-  subnet_ids                    = ["subnet-00bc585a9c0ef3d3b", "subnet-013fae5821f791c04", "subnet-02ce82a489f273bc3", "subnet-040a5a27ae3afacaa", "subnet-043375fbc6882bf86", "subnet-0e8364bc621d0f70e"]
-  subnet_us-east-1a_id          = "subnet-013fae5821f791c04"
-  subnet_us-east-1b_id          = "subnet-043375fbc6882bf86"
-  subnet_us-east-1c_id          = "subnet-040a5a27ae3afacaa"
-  subnet_utility-us-east-1a_id  = "subnet-00bc585a9c0ef3d3b"
-  subnet_utility-us-east-1b_id  = "subnet-0e8364bc621d0f70e"
-  subnet_utility-us-east-1c_id  = "subnet-02ce82a489f273bc3"
-  vpc_id                        = "vpc-0a783655b414b3cea"
+  subnet_ids                    = ["subnet-02fb23cd77f8b1e90", "subnet-076dc4b26002026f2", "subnet-0ac964e0646066b8c", "subnet-0c50b7635be4ce0f0", "subnet-0e448a36e480b24f8", "subnet-0ed3fa3759addb26f"]
+  subnet_us-east-1a_id          = "subnet-0ed3fa3759addb26f"
+  subnet_us-east-1b_id          = "subnet-0c50b7635be4ce0f0"
+  subnet_us-east-1c_id          = "subnet-02fb23cd77f8b1e90"
+  subnet_utility-us-east-1a_id  = "subnet-076dc4b26002026f2"
+  subnet_utility-us-east-1b_id  = "subnet-0ac964e0646066b8c"
+  subnet_utility-us-east-1c_id  = "subnet-0e448a36e480b24f8"
+  vpc_id                        = "vpc-073e0d670fe2e29a0"
 }
 
 output "bastion_autoscaling_group_ids" {
@@ -69,7 +69,7 @@ output "node_security_group_ids" {
 }
 
 output "node_subnet_ids" {
-  value = ["subnet-013fae5821f791c04", "subnet-040a5a27ae3afacaa", "subnet-043375fbc6882bf86"]
+  value = ["subnet-02fb23cd77f8b1e90", "subnet-0c50b7635be4ce0f0", "subnet-0ed3fa3759addb26f"]
 }
 
 output "nodes_role_arn" {
@@ -85,35 +85,35 @@ output "region" {
 }
 
 output "subnet_ids" {
-  value = ["subnet-00bc585a9c0ef3d3b", "subnet-013fae5821f791c04", "subnet-02ce82a489f273bc3", "subnet-040a5a27ae3afacaa", "subnet-043375fbc6882bf86", "subnet-0e8364bc621d0f70e"]
+  value = ["subnet-02fb23cd77f8b1e90", "subnet-076dc4b26002026f2", "subnet-0ac964e0646066b8c", "subnet-0c50b7635be4ce0f0", "subnet-0e448a36e480b24f8", "subnet-0ed3fa3759addb26f"]
 }
 
 output "subnet_us-east-1a_id" {
-  value = "subnet-013fae5821f791c04"
+  value = "subnet-0ed3fa3759addb26f"
 }
 
 output "subnet_us-east-1b_id" {
-  value = "subnet-043375fbc6882bf86"
+  value = "subnet-0c50b7635be4ce0f0"
 }
 
 output "subnet_us-east-1c_id" {
-  value = "subnet-040a5a27ae3afacaa"
+  value = "subnet-02fb23cd77f8b1e90"
 }
 
 output "subnet_utility-us-east-1a_id" {
-  value = "subnet-00bc585a9c0ef3d3b"
+  value = "subnet-076dc4b26002026f2"
 }
 
 output "subnet_utility-us-east-1b_id" {
-  value = "subnet-0e8364bc621d0f70e"
+  value = "subnet-0ac964e0646066b8c"
 }
 
 output "subnet_utility-us-east-1c_id" {
-  value = "subnet-02ce82a489f273bc3"
+  value = "subnet-0e448a36e480b24f8"
 }
 
 output "vpc_id" {
-  value = "vpc-0a783655b414b3cea"
+  value = "vpc-073e0d670fe2e29a0"
 }
 
 provider "aws" {
@@ -173,7 +173,7 @@ resource "aws_autoscaling_group" "bastions-kops-dev-rajmehta-live" {
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = ["subnet-013fae5821f791c04", "subnet-043375fbc6882bf86", "subnet-040a5a27ae3afacaa"]
+  vpc_zone_identifier = ["subnet-0ed3fa3759addb26f", "subnet-0c50b7635be4ce0f0", "subnet-02fb23cd77f8b1e90"]
 }
 
 resource "aws_autoscaling_group" "master-us-east-1a-masters-kops-dev-rajmehta-live" {
@@ -239,7 +239,7 @@ resource "aws_autoscaling_group" "master-us-east-1a-masters-kops-dev-rajmehta-li
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = ["subnet-013fae5821f791c04"]
+  vpc_zone_identifier = ["subnet-0ed3fa3759addb26f"]
 }
 
 resource "aws_autoscaling_group" "nodes-us-east-1a-kops-dev-rajmehta-live" {
@@ -289,7 +289,7 @@ resource "aws_autoscaling_group" "nodes-us-east-1a-kops-dev-rajmehta-live" {
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = ["subnet-013fae5821f791c04"]
+  vpc_zone_identifier = ["subnet-0ed3fa3759addb26f"]
 }
 
 resource "aws_autoscaling_group" "nodes-us-east-1b-kops-dev-rajmehta-live" {
@@ -339,7 +339,7 @@ resource "aws_autoscaling_group" "nodes-us-east-1b-kops-dev-rajmehta-live" {
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = ["subnet-043375fbc6882bf86"]
+  vpc_zone_identifier = ["subnet-0c50b7635be4ce0f0"]
 }
 
 resource "aws_autoscaling_group" "nodes-us-east-1c-kops-dev-rajmehta-live" {
@@ -389,7 +389,7 @@ resource "aws_autoscaling_group" "nodes-us-east-1c-kops-dev-rajmehta-live" {
     propagate_at_launch = true
     value               = "owned"
   }
-  vpc_zone_identifier = ["subnet-040a5a27ae3afacaa"]
+  vpc_zone_identifier = ["subnet-02fb23cd77f8b1e90"]
 }
 
 resource "aws_ebs_volume" "a-etcd-events-kops-dev-rajmehta-live" {
@@ -444,7 +444,7 @@ resource "aws_elb" "api-kops-dev-rajmehta-live" {
   }
   name            = "api-kops-dev-rajmehta-liv-q4ivon"
   security_groups = [aws_security_group.api-elb-kops-dev-rajmehta-live.id]
-  subnets         = ["subnet-00bc585a9c0ef3d3b", "subnet-02ce82a489f273bc3", "subnet-0e8364bc621d0f70e"]
+  subnets         = ["subnet-076dc4b26002026f2", "subnet-0ac964e0646066b8c", "subnet-0e448a36e480b24f8"]
   tags = {
     "KubernetesCluster"                            = "kops.dev.rajmehta.live"
     "Name"                                         = "api.kops.dev.rajmehta.live"
@@ -469,7 +469,7 @@ resource "aws_elb" "bastion-kops-dev-rajmehta-live" {
   }
   name            = "bastion-kops-dev-rajmehta-9usm5h"
   security_groups = [aws_security_group.bastion-elb-kops-dev-rajmehta-live.id]
-  subnets         = ["subnet-00bc585a9c0ef3d3b", "subnet-02ce82a489f273bc3", "subnet-0e8364bc621d0f70e"]
+  subnets         = ["subnet-076dc4b26002026f2", "subnet-0ac964e0646066b8c", "subnet-0e448a36e480b24f8"]
   tags = {
     "KubernetesCluster"                            = "kops.dev.rajmehta.live"
     "Name"                                         = "bastion.kops.dev.rajmehta.live"
@@ -946,7 +946,7 @@ resource "aws_route53_record" "api-kops-dev-rajmehta-live" {
   }
   name    = "api.kops.dev.rajmehta.live"
   type    = "A"
-  zone_id = "/hostedzone/Z00127373N0C47SV20IFV"
+  zone_id = "/hostedzone/Z0224892ZI1GZ1PWVI1H"
 }
 
 resource "aws_route53_record" "bastion-kops-dev-rajmehta-live" {
@@ -957,7 +957,7 @@ resource "aws_route53_record" "bastion-kops-dev-rajmehta-live" {
   }
   name    = "bastion.kops.dev.rajmehta.live"
   type    = "A"
-  zone_id = "/hostedzone/Z00127373N0C47SV20IFV"
+  zone_id = "/hostedzone/Z0224892ZI1GZ1PWVI1H"
 }
 
 resource "aws_s3_object" "cluster-completed-spec" {
@@ -1120,7 +1120,7 @@ resource "aws_security_group" "api-elb-kops-dev-rajmehta-live" {
     "Name"                                         = "api-elb.kops.dev.rajmehta.live"
     "kubernetes.io/cluster/kops.dev.rajmehta.live" = "owned"
   }
-  vpc_id = "vpc-0a783655b414b3cea"
+  vpc_id = "vpc-073e0d670fe2e29a0"
 }
 
 resource "aws_security_group" "bastion-elb-kops-dev-rajmehta-live" {
@@ -1131,7 +1131,7 @@ resource "aws_security_group" "bastion-elb-kops-dev-rajmehta-live" {
     "Name"                                         = "bastion-elb.kops.dev.rajmehta.live"
     "kubernetes.io/cluster/kops.dev.rajmehta.live" = "owned"
   }
-  vpc_id = "vpc-0a783655b414b3cea"
+  vpc_id = "vpc-073e0d670fe2e29a0"
 }
 
 resource "aws_security_group" "bastion-kops-dev-rajmehta-live" {
@@ -1142,7 +1142,7 @@ resource "aws_security_group" "bastion-kops-dev-rajmehta-live" {
     "Name"                                         = "bastion.kops.dev.rajmehta.live"
     "kubernetes.io/cluster/kops.dev.rajmehta.live" = "owned"
   }
-  vpc_id = "vpc-0a783655b414b3cea"
+  vpc_id = "vpc-073e0d670fe2e29a0"
 }
 
 resource "aws_security_group" "masters-kops-dev-rajmehta-live" {
@@ -1153,7 +1153,7 @@ resource "aws_security_group" "masters-kops-dev-rajmehta-live" {
     "Name"                                         = "masters.kops.dev.rajmehta.live"
     "kubernetes.io/cluster/kops.dev.rajmehta.live" = "owned"
   }
-  vpc_id = "vpc-0a783655b414b3cea"
+  vpc_id = "vpc-073e0d670fe2e29a0"
 }
 
 resource "aws_security_group" "nodes-kops-dev-rajmehta-live" {
@@ -1164,7 +1164,7 @@ resource "aws_security_group" "nodes-kops-dev-rajmehta-live" {
     "Name"                                         = "nodes.kops.dev.rajmehta.live"
     "kubernetes.io/cluster/kops.dev.rajmehta.live" = "owned"
   }
-  vpc_id = "vpc-0a783655b414b3cea"
+  vpc_id = "vpc-073e0d670fe2e29a0"
 }
 
 resource "aws_security_group_rule" "from-0-0-0-0--0-ingress-tcp-22to22-bastion-elb-kops-dev-rajmehta-live" {

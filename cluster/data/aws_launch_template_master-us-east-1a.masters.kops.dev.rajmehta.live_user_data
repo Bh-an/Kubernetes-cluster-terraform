@@ -247,7 +247,7 @@ CloudProvider: aws
 ConfigBase: s3://a4-kops-state/kops.dev.rajmehta.live
 InstanceGroupName: master-us-east-1a
 InstanceGroupRole: Master
-NodeupConfigHash: 6Pb3gdiiwMM6BFJwbfY315WHSKhZpufMHPcoH4OXnWs=
+NodeupConfigHash: E3cnaQlmgDifs4FeyQ4G1Zob2QS+voaFTILPKrXrIKo=
 
 __EOF_KUBE_ENV
 

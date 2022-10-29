@@ -1,7 +1,7 @@
 apiVersion: kops.k8s.io/v1alpha2
 kind: Cluster
 metadata:
-  creationTimestamp: "2022-10-21T02:46:12Z"
+  creationTimestamp: "2022-10-28T23:50:33Z"
   name: kops.dev.rajmehta.live
 spec:
   api:
@@ -23,7 +23,7 @@ spec:
   containerd:
     logLevel: info
     version: 1.4.13
-  dnsZone: Z00127373N0C47SV20IFV
+  dnsZone: Z0224892ZI1GZ1PWVI1H
   docker:
     skipInstall: true
   etcdClusters:
@@ -170,7 +170,7 @@ spec:
     shutdownGracePeriodCriticalPods: 0s
   masterPublicName: api.kops.dev.rajmehta.live
   networkCIDR: 10.0.0.0/16
-  networkID: vpc-0a783655b414b3cea
+  networkID: vpc-073e0d670fe2e29a0
   networking:
     amazonvpc: {}
   nonMasqueradeCIDR: 10.0.0.0/16
@@ -182,32 +182,32 @@ spec:
   - ::/0
   subnets:
   - cidr: 10.0.101.0/24
-    id: subnet-013fae5821f791c04
+    id: subnet-0ed3fa3759addb26f
     name: us-east-1a
     type: Private
     zone: us-east-1a
   - cidr: 10.0.102.0/24
-    id: subnet-043375fbc6882bf86
+    id: subnet-0c50b7635be4ce0f0
     name: us-east-1b
     type: Private
     zone: us-east-1b
   - cidr: 10.0.103.0/24
-    id: subnet-040a5a27ae3afacaa
+    id: subnet-02fb23cd77f8b1e90
     name: us-east-1c
     type: Private
     zone: us-east-1c
   - cidr: 10.0.1.0/24
-    id: subnet-00bc585a9c0ef3d3b
+    id: subnet-076dc4b26002026f2
     name: utility-us-east-1a
     type: Utility
     zone: us-east-1a
   - cidr: 10.0.2.0/24
-    id: subnet-0e8364bc621d0f70e
+    id: subnet-0ac964e0646066b8c
     name: utility-us-east-1b
     type: Utility
     zone: us-east-1b
   - cidr: 10.0.3.0/24
-    id: subnet-02ce82a489f273bc3
+    id: subnet-0e448a36e480b24f8
     name: utility-us-east-1c
     type: Utility
     zone: us-east-1c
