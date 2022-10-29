@@ -25,3 +25,7 @@ variable "internet_gateway_tag" {
 variable "routetable_tag" {
     
 }
+
+# variable "cluster_sec_group" {
+    
+# }

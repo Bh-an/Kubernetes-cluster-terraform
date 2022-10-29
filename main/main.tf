@@ -2,6 +2,11 @@ provider "aws" {
     region = "us-east-1"
 }
 
+
+locals {
+  production_availability_zones = ["${var.region}a", "${var.region}b", "${var.region}c"]
+}
+
 module "iam" {
     source = "../modules/iam"
 }
@@ -26,17 +31,14 @@ output "credentials" {
 }
 
 module "cluster_vpc" {
-    source = "../modules/networking"
+    source = "../modules/cluster_networking"
 
-    vpc_cidr_block = var.cluster_vpc_cidr_block
-    vpc_tag = var.cluster_vpc_tag
-
-    subnets_block = var.cluster_subnets_block
-    azs = var.azs
-    
-    subnet_block_tag = var.cluster_subnet_block_tag
-    internet_gateway_tag = var.cluster_internet_gateway_tag
-    routetable_tag = var.cluster_routetable_tag
+    region             = var.region
+  environment          = var.environment
+  vpc_cidr             = var.cluster_vpc_cidr_block
+  public_subnets_cidr  = var.cluster_public_subnets_block
+  private_subnets_cidr = var.cluster_private_subnets_block
+  availability_zones   = local.production_availability_zones
 }
 
 module "aws_vpc" {
@@ -51,6 +53,7 @@ module "aws_vpc" {
     subnet_block_tag = var.aws_subnet_block_tag
     internet_gateway_tag = var.aws_internet_gateway_tag
     routetable_tag = var.aws_routetable_tag
+    //cluster_sec_group = module.cluster_vpc.security_groups_ids
 }
 
 module "rds" {
@@ -69,6 +72,7 @@ module "rds" {
     rds_tag = var.rds_tag
     subnet_block_tag = var.aws_subnet_block_tag
     subnet_id = module.aws_vpc.subnet_id
+    rds_security_group = module.aws_vpc.security_group_id
 }
 
 module "vpc_peering" {
@@ -77,14 +81,21 @@ module "vpc_peering" {
     requestor_vpc_id = module.cluster_vpc.vpc_id
     acceptor_vpc_id = module.aws_vpc.vpc_id
 
-    requestor_route_table_id = module.cluster_vpc.route_table_id
+    requestor_route_table_id = module.cluster_vpc.public_route_table
     requestor_cidr_block = var.cluster_vpc_cidr_block
 
     acceptor_route_table_id = module.aws_vpc.route_table_id
     acceptor_cidr_block = var.aws_vpc_cidr_block
 }
 
-
+resource "aws_security_group_rule" "attach_sec" {
+    type = "ingress"
+    from_port = 3306
+    to_port = 3306
+    protocol = "tcp"
+    security_group_id = module.aws_vpc.security_group_id
+    source_security_group_id = module.cluster_vpc.default_sg_id
+}
 
 # resource "null_resource" "kops_script" {
 #     provisioner "local-exec" {
