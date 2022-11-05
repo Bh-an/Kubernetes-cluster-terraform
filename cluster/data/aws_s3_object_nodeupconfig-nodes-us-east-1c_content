@@ -12,30 +12,30 @@ Assets:
 CAs:
   kubernetes-ca: |
     -----BEGIN CERTIFICATE-----
-    MIIC+DCCAeCgAwIBAgIMFyJgnYWsb1BkOatWMA0GCSqGSIb3DQEBCwUAMBgxFjAU
-    BgNVBAMTDWt1YmVybmV0ZXMtY2EwHhcNMjIxMDI2MjM1MDQxWhcNMzIxMDI1MjM1
-    MDQxWjAYMRYwFAYDVQQDEw1rdWJlcm5ldGVzLWNhMIIBIjANBgkqhkiG9w0BAQEF
-    AAOCAQ8AMIIBCgKCAQEAwTD99tcvGYpniF6E9SZPQzY6lOFLjB/ywI0sdM6bGKpP
-    TpThrpLDAvTHSeza9rCxhVNGCPLHSFn1Ocd/YIBaXuaTMWQ2c+UYmLBw3unZ2tCU
-    ZpMASDUPWOxcANpuf0XGLRm7O0UVPZHQxXq4OE8AAAd62gTyRidGpA0crqqE5Can
-    RzPjEXSDK9oOShRbSwBC4I0rxzVORgjqc80TXVX3e65rCWfG5g7S8i60vgNp5MIi
-    GF1rRzDMT2MX4cud0Jqwbzn4UVomHWFk6QAPcO50scEwf9v+e13X2Q5L+2/n45qM
-    DdO17f/9dW6xjuLTMImwz0ZQT0fCDR1DM3Xt8UWo+wIDAQABo0IwQDAOBgNVHQ8B
-    Af8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQU/TmWK5HkvEEfAFX3
-    V8nu9RN2jIAwDQYJKoZIhvcNAQELBQADggEBAEDbDD3cSIImidxyeAzp46qBo/sJ
-    SeLqyJLQkecPaGezK2n674fkcy3CgO0CiKFd3EkGAhJfjynYn3djjLG6u2qemu18
-    TY/ibeJeShuLmWszPJpiEsj50gXnWzTf+s7Jh81lopjN+1j6EsA1JzYBNIsdqGiR
-    jQTQ1sg+2nAbJl7HoKtlHJSVoRZ6FRreHMZNsVMMwlbkU70XsIV0R3Tt/rQ+F1Lw
-    DUFqXj04e6Kid/Y1dj5LJOFElHZEujJfB6PCn88D0uJIrBgvkXtGfyGs20y4l680
-    uDUI+grCDDU1jY89IF/nEphiE/tBD+24X5wKC1D8sdrv3hEtJYU/fPphvDA=
+    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
     -----END CERTIFICATE-----
-ClusterName: kops.dev.rajmehta.live
+ClusterName: kops.prod.rajmehta.live
 DefaultMachineType: t3.medium
 Hooks:
 - null
 - null
 KeypairIDs:
-  kubernetes-ca: "7159714956711205125058308950"
+  kubernetes-ca: "7162310113548667575814526125"
 KubeletConfig:
   anonymousAuth: false
   cgroupDriver: systemd
@@ -57,7 +57,7 @@ KubeletConfig:
   shutdownGracePeriodCriticalPods: 0s
 UpdatePolicy: automatic
 channels:
-- s3://a4-kops-state/kops.dev.rajmehta.live/addons/bootstrap-channel.yaml
+- s3://a4-kops-state-prod/kops.prod.rajmehta.live/addons/bootstrap-channel.yaml
 containerdConfig:
   logLevel: info
   version: 1.4.13

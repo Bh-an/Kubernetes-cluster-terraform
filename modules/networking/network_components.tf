@@ -56,13 +56,20 @@ resource "aws_security_group" "default" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-    # ingress {
-    #     from_port = 3306
-    #     to_port = 3306
-    #     protocol = "tcp"
-    #     //cidr_blocks = ["0.0.0.0/0"]
-    #     security_groups = var.cluster_sec_group
-    # }
+    ingress {
+        from_port = 3306
+        to_port = 3306
+        protocol = "tcp"
+        //cidr_blocks = ["0.0.0.0/0"]
+        security_groups = var.cluster_sec_group
+    }
+
+    ingress {
+        from_port = 3306
+        to_port = 3306
+        protocol = "tcp"
+        cidr_blocks = ["10.0.0.0/16"]
+    }
 
     egress {
         from_port = "0"
