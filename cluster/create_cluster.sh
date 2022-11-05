@@ -4,7 +4,7 @@ CLOUD="aws"
 #MASTER_ZONES="us-east-1a,us-east-1b,us-east-1c"
 MASTER_ZONES="us-east-1a"
 ZONES="us-east-1a,us-east-1b,us-east-1c"
-BUCKET_NAME="s3://a4-kops-state"
+BUCKET_NAME="s3://a4-kops-state-prod"
 NODE_COUNT=1
 NODE_SIZE="t3.medium"
 MASTER_SIZE="t3.medium"
@@ -77,6 +77,10 @@ echo $(aws elb --region us-east-1 --output=table describe-load-balancers|grep DN
 
 #  bash ../cluster/create_cluster.sh -n kops.prd.aws.applicationbhan.me -e ~/awsnewkey.pub -v vpc-022fe7d73ed98b002 -s subnet-055eef2650a320cb4,subnet-0903c7967c6387123,subnet-0a7f83cf4ce1b81b4
 
-# ./create_cluster.sh -n kops.dev.rajmehta.live -e ~/CSYE7125/id_rsa.pub -v vpc-073e0d670fe2e29a0 -s subnet-076dc4b26002026f2,subnet-0ac964e0646066b8c,subnet-0e448a36e480b24f8 -p subnet-0ed3fa3759addb26f,subnet-0c50b7635be4ce0f0,subnet-02fb23cd77f8b1e90
-# kops delete cluster --state s3://a4-kops-state --name=kops.dev.rajmehta.live --yes
-# kops validate cluster --state s3://a4-kops-state --name=kops.dev.rajmehta.live
+# ./create_cluster.sh -n kops.prod.rajmehta.live -e ~/CSYE7125/id_rsa.pub -v vpc-0be45cac14ea92f24 -s subnet-00de6422f5486e418,subnet-0e19014e396c015c9,subnet-008bb311ec92b03fc -p subnet-0fcbef1ed0b2e4794,subnet-0c07628d131665280,subnet-0843b6079295e1392
+# ./create_cluster.sh -n kops.prod.rajmehta.live -e ~/CSYE7125/id_rsa.pub -v vpc-00e673a3b5150cf0a -s subnet-0c1bfc5a0909f2bff,subnet-08732240c126b5422,subnet-0e851274df47590e5, -p subnet-0c5de9dee9b958452,subnet-09110b4e4414b5274,subnet-00a6edcfe396a03f4
+
+# kops delete cluster --state s3://a4-kops-state-prod --name=kops.prod.rajmehta.live --yes
+# kops validate cluster --state s3://a4-kops-state-prod --name=kops.prod.rajmehta.live --wait 10m
+    
+

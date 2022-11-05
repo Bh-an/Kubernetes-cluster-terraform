@@ -26,6 +26,6 @@ variable "routetable_tag" {
     
 }
 
-# variable "cluster_sec_group" {
+variable "cluster_sec_group" {
     
-# }
+}

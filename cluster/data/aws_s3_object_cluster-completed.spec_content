@@ -1,8 +1,8 @@
 apiVersion: kops.k8s.io/v1alpha2
 kind: Cluster
 metadata:
-  creationTimestamp: "2022-10-28T23:50:33Z"
-  name: kops.dev.rajmehta.live
+  creationTimestamp: "2022-11-04T23:41:05Z"
+  name: kops.prod.rajmehta.live
 spec:
   api:
     loadBalancer:
@@ -17,18 +17,18 @@ spec:
     manageStorageClasses: true
   cloudProvider: aws
   clusterDNSDomain: cluster.local
-  configBase: s3://a4-kops-state/kops.dev.rajmehta.live
-  configStore: s3://a4-kops-state/kops.dev.rajmehta.live
+  configBase: s3://a4-kops-state-prod/kops.prod.rajmehta.live
+  configStore: s3://a4-kops-state-prod/kops.prod.rajmehta.live
   containerRuntime: containerd
   containerd:
     logLevel: info
     version: 1.4.13
-  dnsZone: Z0224892ZI1GZ1PWVI1H
+  dnsZone: Z1031665334AR8BET47AY
   docker:
     skipInstall: true
   etcdClusters:
   - backups:
-      backupStore: s3://a4-kops-state/kops.dev.rajmehta.live/backups/etcd/main
+      backupStore: s3://a4-kops-state-prod/kops.prod.rajmehta.live/backups/etcd/main
     cpuRequest: 200m
     etcdMembers:
     - encryptedVolume: true
@@ -38,7 +38,7 @@ spec:
     name: main
     version: 3.4.13
   - backups:
-      backupStore: s3://a4-kops-state/kops.dev.rajmehta.live/backups/etcd/events
+      backupStore: s3://a4-kops-state-prod/kops.prod.rajmehta.live/backups/etcd/events
     cpuRequest: 100m
     etcdMembers:
     - encryptedVolume: true
@@ -52,7 +52,7 @@ spec:
   iam:
     allowContainerRegistry: true
     legacy: false
-  keyStore: s3://a4-kops-state/kops.dev.rajmehta.live/pki
+  keyStore: s3://a4-kops-state-prod/kops.prod.rajmehta.live/pki
   kubeAPIServer:
     allowPrivileged: true
     anonymousAuth: false
@@ -91,8 +91,8 @@ spec:
     requestheaderUsernameHeaders:
     - X-Remote-User
     securePort: 443
-    serviceAccountIssuer: https://api.internal.kops.dev.rajmehta.live
-    serviceAccountJWKSURI: https://api.internal.kops.dev.rajmehta.live/openid/v1/jwks
+    serviceAccountIssuer: https://api.internal.kops.prod.rajmehta.live
+    serviceAccountJWKSURI: https://api.internal.kops.prod.rajmehta.live/openid/v1/jwks
     serviceClusterIPRange: 10.0.0.0/19
     storageBackend: etcd3
   kubeControllerManager:
@@ -100,7 +100,7 @@ spec:
     attachDetachReconcileSyncPeriod: 1m0s
     cloudProvider: aws
     clusterCIDR: 10.0.128.0/17
-    clusterName: kops.dev.rajmehta.live
+    clusterName: kops.prod.rajmehta.live
     configureCloudRoutes: false
     image: registry.k8s.io/kube-controller-manager:v1.20.0@sha256:00ccc3a5735e82d53bc26054d594a942fae64620a6f84018c057a519ba7ed1dc
     leaderElection:
@@ -150,7 +150,7 @@ spec:
   - 0.0.0.0/0
   - ::/0
   kubernetesVersion: 1.20.0
-  masterInternalName: api.internal.kops.dev.rajmehta.live
+  masterInternalName: api.internal.kops.prod.rajmehta.live
   masterKubelet:
     anonymousAuth: false
     cgroupDriver: systemd
@@ -168,52 +168,52 @@ spec:
     registerSchedulable: false
     shutdownGracePeriod: 0s
     shutdownGracePeriodCriticalPods: 0s
-  masterPublicName: api.kops.dev.rajmehta.live
+  masterPublicName: api.kops.prod.rajmehta.live
   networkCIDR: 10.0.0.0/16
-  networkID: vpc-073e0d670fe2e29a0
+  networkID: vpc-07509b21f111ac8ea
   networking:
     amazonvpc: {}
   nonMasqueradeCIDR: 10.0.0.0/16
   podCIDR: 10.0.128.0/17
-  secretStore: s3://a4-kops-state/kops.dev.rajmehta.live/secrets
+  secretStore: s3://a4-kops-state-prod/kops.prod.rajmehta.live/secrets
   serviceClusterIPRange: 10.0.0.0/19
   sshAccess:
   - 0.0.0.0/0
   - ::/0
   subnets:
   - cidr: 10.0.101.0/24
-    id: subnet-0ed3fa3759addb26f
+    id: subnet-031458f4ac7871d14
     name: us-east-1a
     type: Private
     zone: us-east-1a
   - cidr: 10.0.102.0/24
-    id: subnet-0c50b7635be4ce0f0
+    id: subnet-0d0eba6dbfef49139
     name: us-east-1b
     type: Private
     zone: us-east-1b
   - cidr: 10.0.103.0/24
-    id: subnet-02fb23cd77f8b1e90
+    id: subnet-09ed3cd185ebd442e
     name: us-east-1c
     type: Private
     zone: us-east-1c
   - cidr: 10.0.1.0/24
-    id: subnet-076dc4b26002026f2
+    id: subnet-0d932bf0a6a921e1c
     name: utility-us-east-1a
     type: Utility
     zone: us-east-1a
   - cidr: 10.0.2.0/24
-    id: subnet-0ac964e0646066b8c
+    id: subnet-0224c42ff35eb460e
     name: utility-us-east-1b
     type: Utility
     zone: us-east-1b
   - cidr: 10.0.3.0/24
-    id: subnet-0e448a36e480b24f8
+    id: subnet-063ed30acd382ec76
     name: utility-us-east-1c
     type: Utility
     zone: us-east-1c
   topology:
     bastion:
-      bastionPublicName: bastion.kops.dev.rajmehta.live
+      bastionPublicName: bastion.kops.prod.rajmehta.live
     dns:
       type: Public
     masters: private

@@ -1,6 +1,6 @@
-s3_bucket_name = "a4-kops-state"
-subdomain_value = "kops.dev.rajmehta.live"
-main_domain_value = "dev.rajmehta.live"
+s3_bucket_name = "a4-kops-state-prod"
+subdomain_value = "kops.prod.rajmehta.live"
+main_domain_value = "prod.rajmehta.live"
 
 cluster_vpc_cidr_block = "10.0.0.0/16"
 aws_vpc_cidr_block = "10.1.0.0/16"
