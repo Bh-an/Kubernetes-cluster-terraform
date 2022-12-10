@@ -1,11 +1,11 @@
 #!/bin/bash
 
 CLOUD="aws"
-#MASTER_ZONES="us-east-1a,us-east-1b,us-east-1c"
-MASTER_ZONES="us-east-1a"
+MASTER_ZONES="us-east-1a,us-east-1b,us-east-1c"
+# MASTER_ZONES="us-east-1a"
 ZONES="us-east-1a,us-east-1b,us-east-1c"
 BUCKET_NAME="s3://a4-kops-state-prod"
-NODE_COUNT=1
+NODE_COUNT="4"
 NODE_SIZE="t3.medium"
 MASTER_SIZE="t3.medium"
 SSH_PUB_KEY_LOCATION="~/CSYE7125/id_rsa.pub"
@@ -53,7 +53,7 @@ while getopts 'n:b:c:e:v:s:p:' OPTION; do
 done
 
 kops create cluster \
---kubernetes-version="1.20.0" \
+--kubernetes-version="1.21.0" \
 --name  ${CLUSTER_NAME} \
 --cloud=${CLOUD} \
 --master-zones=${MASTER_ZONES} \
