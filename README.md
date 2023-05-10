@@ -16,6 +16,7 @@ terraform init
 terraform plan
 terraform apply
 ```
+*Note: The values for cluster configuration can be shown through* ```terraform output``` *after resources are set up
 
 ## For setting up the cluster:
 
