@@ -1,7 +1,7 @@
 # IAC Kubernetes cluster
 
 - The terraform modules create supporting infrastructure for a kube cluster like VPC's, RDS, Peering connection, bucket etc
-- The script the kOps library to setup kube cluster configuration into terraform which can then be applied onto previously created resources
+- The create_cluster script uses the kOps library to setup kube cluster configuration into terraform which can then be applied onto previously created resources
 
 ## To set up networking and other aws resources: 
 
